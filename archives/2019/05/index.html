@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>java多线程环境下竞态条件的问题 | 心若向善，处处都是阳光</title>
+  <title>Archives: 2019/5 | 心若向善，处处都是阳光</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -62,7 +62,7 @@
 <script src="https://leancloud.cn/scripts/lib/av-0.4.6.min.js"></script>
   <script>AV.initialize("3FAfRbmevTbHahEjKoArMzvP-gzGzoHsz", "revve2KjQfFdtB0rBcmOo3aV");</script>
 <!--
-<body class="post-template">
+<body class="home-template">
 -->
 <body id="index" class="lightnav animsition">
 
@@ -198,114 +198,66 @@
         <!-- ============================ Header & Logo bar =========================== -->
 
 
-      
-<section id="intro">
-    <div class="container">
-        <div class="row col-md-offset-2">
-            <div class="col-md-8">
+      <!-- ============================ Hero Image =========================== -->
 
-                <h1>java多线程环境下竞态条件的问题</h1>
-                发表于<span class="post-meta">
-      <time datetime="2019-06-19T05:28:27.000Z" itemprop="datePublished">
-          2019-06-19
-      </time>
-    
-</span>
-                <span id="busuanzi_container_page_pv">&nbsp&nbsp&nbsp&nbsp阅读次数：
-                    <span id="busuanzi_value_page_pv"></span>次
-                </span>
+<section id="hero" class="scrollme">
+    <div class="container-fluid element-img" style="background: url(/img/lang.jpg) no-repeat center center fixed;background-size: cover">
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
+                <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
+                    <div>
+                        
+                        <h2><span>每一个不曾起舞的日子都是对生命的辜负，我终将变得更好</span></h2>
+                        <p></p>
+                        
+
+                    </div>
+                </div>
             </div>
+            <!-- // .col-md-12 -->
         </div>
-        <div class="col-md-8 col-md-offset-2">
-      		<h4 id="一、什么是竞态条件"><a href="#一、什么是竞态条件" class="headerlink" title="一、什么是竞态条件"></a>一、什么是竞态条件</h4><h5 id="在java多线程中，当两个或两个以上的线程对同一个数据（共享变量，数据库中表存储的数据）进行操作的时候，竞态条件会导致程序在并发情况下出现一些bugs，即不是我们预期的正确的结果"><a href="#在java多线程中，当两个或两个以上的线程对同一个数据（共享变量，数据库中表存储的数据）进行操作的时候，竞态条件会导致程序在并发情况下出现一些bugs，即不是我们预期的正确的结果" class="headerlink" title="在java多线程中，当两个或两个以上的线程对同一个数据（共享变量，数据库中表存储的数据）进行操作的时候，竞态条件会导致程序在并发情况下出现一些bugs，即不是我们预期的正确的结果"></a>在java多线程中，当两个或两个以上的线程对同一个数据（共享变量，数据库中表存储的数据）进行操作的时候，竞态条件会导致程序在并发情况下出现一些bugs，即不是我们预期的正确的结果</h5><h4 id="二、什么情况下会出现"><a href="#二、什么情况下会出现" class="headerlink" title="二、什么情况下会出现"></a>二、什么情况下会出现</h4><h5 id="小编在工作中就遇到了这个问题，简单说明一下，多线程去读写redis中存储的url链接，假设有10000条，10个线程去读写，每次读1000条，并且把读取过的删除掉（由于业务需要，逻辑删除，置一个不再读取的状态），理论上10个线程读写完成后还剩余0条url链接，但实际剩余url链接远大于0，怎么回事？"><a href="#小编在工作中就遇到了这个问题，简单说明一下，多线程去读写redis中存储的url链接，假设有10000条，10个线程去读写，每次读1000条，并且把读取过的删除掉（由于业务需要，逻辑删除，置一个不再读取的状态），理论上10个线程读写完成后还剩余0条url链接，但实际剩余url链接远大于0，怎么回事？" class="headerlink" title="小编在工作中就遇到了这个问题，简单说明一下，多线程去读写redis中存储的url链接，假设有10000条，10个线程去读写，每次读1000条，并且把读取过的删除掉（由于业务需要，逻辑删除，置一个不再读取的状态），理论上10个线程读写完成后还剩余0条url链接，但实际剩余url链接远大于0，怎么回事？"></a>小编在工作中就遇到了这个问题，简单说明一下，多线程去读写redis中存储的url链接，假设有10000条，10个线程去读写，每次读1000条，并且把读取过的删除掉（由于业务需要，逻辑删除，置一个不再读取的状态），理论上10个线程读写完成后还剩余0条url链接，但实际剩余url链接远大于0，怎么回事？</h5><p>简单写个demo复现一下：</p>
-<pre><code>public class ThreadTest implements Runnable{
-    //共享资源(临界资源)
-    static int i=0;
-    public static void instance() {
-        i++;
-    }
-
-    public void run() {
-        for (int i = 0; i &lt; 10000; i++) {
-            instance();
-        }
-    }
-
-    public static void main(String[] args) {
-        ThreadTest test1 = new ThreadTest();
-        ThreadTest test2 = new ThreadTest();
-        Thread thread1 = new Thread(test1);
-        Thread thread2 = new Thread(test2);
-        thread1.start();
-        thread2.start();
-        try {
-            //等待两个线程执行结束，主线程在执行
-            thread1.join();
-            thread2.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.err.println(&quot;线程：{&quot;+Thread.currentThread().getName()+&quot;}&quot;+i);
-        }
-    }
-</code></pre><p>大家猜一下结果是多少？是20000吗？</p>
-<p>运行结果是线程：{main}17754</p>
-<h4 id="三、怎么解决（线程同步）"><a href="#三、怎么解决（线程同步）" class="headerlink" title="三、怎么解决（线程同步）"></a>三、怎么解决（线程同步）</h4><h5 id="1-当多个线程需要访问同一资源的时候，它们需要以某种顺序来确保该资源在某一时刻只能被一个线程使用，否则程序的运行结果将不可预料。"><a href="#1-当多个线程需要访问同一资源的时候，它们需要以某种顺序来确保该资源在某一时刻只能被一个线程使用，否则程序的运行结果将不可预料。" class="headerlink" title="1.当多个线程需要访问同一资源的时候，它们需要以某种顺序来确保该资源在某一时刻只能被一个线程使用，否则程序的运行结果将不可预料。"></a>1.当多个线程需要访问同一资源的时候，它们需要以某种顺序来确保该资源在某一时刻只能被一个线程使用，否则程序的运行结果将不可预料。</h5><h5 id="2-实现线程同步的常用的方式："><a href="#2-实现线程同步的常用的方式：" class="headerlink" title="2.实现线程同步的常用的方式："></a>2.实现线程同步的常用的方式：</h5><pre><code>1）synchronized关键字,只需要在此处代码加入同步锁即可，synchronized自动解锁。
-
-        public synchronized static void instance() {
-            i++;
-        }
-
-2）Lock锁，JDK5中新加入了一个Lock接口的实现类ReetrantLock. 它不仅拥有和synchronized相同的并发性和内存语义，还多了读写锁、定时锁、等候和中断锁等。但是Lock需要手动解锁，而且必须在finally块中释放，否则可能会引起死锁。
-
-        static ReentrantLock lock = new ReentrantLock();
-        public static void instance() {
-            try {
-                lock.lock();
-                i++;
-            }finally {
-                lock.unlock();
-            }
-        }
-
-3）此处思考为什么不能用volatile,因为volatile虽然能保证可见性，每次强制从主存中读取最新的值，但是demo中i++不是原子操作
-</code></pre><p><code>关于作者</code></p>
-<p>在兴趣的驱动下,写一个<code>免费</code>的东西，有欣喜，也还有汗水，希望您能喜欢我的作品，尊重原创，共同进步</p>
-<p>水平有限，<code>如有错误，请不吝赐教</code>，虚心改正</p>
-
-            <div class="clearfix"></div>
-            <hr class="nogutter">
-        </div>
-        <nav class="clearfix">
-            <nav class="pagination" role="pagination">
-    
-    
-    <a class="pull-right" href="/2017/11/28/Spring-Boot快速入门之连接Mysql集成redis做缓存（二）/">
-        Spring-Boot快速入门之连接Mysql集成redis做缓存（二） →
-    </a>
-    
-</nav>
-
-        </nav>
-        <div class="duoshuo" style="padding-top:30px">
-            <div id="cyReward" role="cylabs" data-use="reward" style="text-align:center"></div>
-            <!-- 畅言评论框 start -->
-<div id="SOHUCS" sid="undefined" style="padding: 0px 30px 0px 46px;"></div>
-<!-- 畅言评论框 end -->
-<script type="text/javascript"> 
-(function(){ 
-var appid = 'cyt8ELT4g'; 
-var conf = 'prod_7d9bc5076718eb3f413bf4277ad59436'; 
-var width = window.innerWidth || document.documentElement.clientWidth; 
-if (width < 960) { 
-window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
-        </div>
+        <div class="herofade beige-dk"></div>
     </div>
-        <script type="text/javascript" charset="utf-8" src="https://changyan.itc.cn/js/lib/jquery.js"></script>
-        <script type="text/javascript" charset="utf-8" src="https://changyan.sohu.com/js/changyan.labs.https.js?appid=cytaHjVBa"></script>
 </section>
 
+<!-- Height spacing helper -->
+<div class="heightblock"></div>
+<!-- // End height spacing helper -->
 
+<!-- ============================ END Hero Image =========================== -->
+
+
+
+
+<section id="services">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="row boxes">
+                    
+                    
+                        
+                        
+                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
+                            
+                              <h4 class="title"><a href="/2019/05/19/java多线程环境下竞态条件的问题/">java多线程环境下竞态条件的问题</a></h4>
+                            
+                            <p><time datetime="2019-05-19T11:28:27.000Z"><a href="/2019/05/19/java多线程环境下竞态条件的问题/">2019-05-19</a></time></p>
+                        </div>
+                    
+                </div>
+            </div>    
+        </div>
+    </div>
+</section> 
+
+<section id="statement">
+    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
+        <div class="row">
+            <p>你不将就一切都时候，生活自然会厚爱于你。</p>
+        </div>
+    </div>
+</section>
       
 <!-- ============================ Footer =========================== -->
 
