@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>java 基础知识总结（重点） | 心若向善，处处都是阳光</title>
+  <title>Archives: 2019/3 | 心若向善，处处都是阳光</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -62,7 +62,7 @@
 <script src="https://leancloud.cn/scripts/lib/av-0.4.6.min.js"></script>
   <script>AV.initialize("3FAfRbmevTbHahEjKoArMzvP-gzGzoHsz", "revve2KjQfFdtB0rBcmOo3aV");</script>
 <!--
-<body class="post-template">
+<body class="home-template">
 -->
 <body id="index" class="lightnav animsition">
 
@@ -198,75 +198,66 @@
         <!-- ============================ Header & Logo bar =========================== -->
 
 
-      
-<section id="intro">
-    <div class="container">
-        <div class="row col-md-offset-2">
-            <div class="col-md-8">
+      <!-- ============================ Hero Image =========================== -->
 
-                <h1>java 基础知识总结（重点）</h1>
-                发表于<span class="post-meta">
-      <time datetime="2017-09-26T10:30:10.000Z" itemprop="datePublished">
-          2017-09-26
-      </time>
-    
-</span>
-                <span id="busuanzi_container_page_pv">&nbsp&nbsp&nbsp&nbsp阅读次数：
-                    <span id="busuanzi_value_page_pv"></span>次
-                </span>
+<section id="hero" class="scrollme">
+    <div class="container-fluid element-img" style="background: url(/img/lang.jpg) no-repeat center center fixed;background-size: cover">
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
+                <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
+                    <div>
+                        
+                        <h2><span>每一个不曾起舞的日子都是对生命的辜负，我终将变得更好</span></h2>
+                        <p></p>
+                        
+
+                    </div>
+                </div>
             </div>
+            <!-- // .col-md-12 -->
         </div>
-        <div class="col-md-8 col-md-offset-2">
-      		<p>一、static关键字<br>    1.Static只可以修饰类的成员变量，不可以修饰局部变量<br>    2.被 static 所修饰的属性、方法或者内部类，可以使用类名.属性、类名.方法以及类名.内部类名来直接引用，无需创建实例<br>    3.类属性中被 static 所引用的变量，会被作为 GC 的 root 根节点。作为根节点就意味着，这一类变量是基本上不会被回收的。因此，static 很容易引入内存泄漏的风险，要根据 情况谨慎使用<br>        1）内存泄漏的另一个常见来源是缓存，<br>            一旦你把对象引用放入到缓存中，他就很容易遗忘，对于这个问题，可以使用WeakHashMap代表缓存，此种Map的特点是，当除了自身有对key的引用外，此key没有其他引用那么此map会自动丢弃此值。<br>        2）监听器和回调引起的内存泄漏<br>            内存泄漏第三个常见来源是监听器和其他回调，如果客户端在你实现的API中注册回调，却没有显示的取消，那么就会积聚。需要确保回调立即被当作垃圾回收的最佳方法是只保存他的若引用，例如将他们保存成为WeakHashMap中的键。<br>二、volatile 关键字（解决多线程，高并发必备，在并发编程中，我们通常会遇到以下三个问题：原子性问题，可见性问题，有序性问题。）<br>    1.一旦一个共享变量（类的成员变量、类的静态成员变量）被volatile修饰之后，那么就具备了两层语义：</p>
-<pre><code>    1）保证了不同线程对这个变量进行操作时的可见性，即一个线程修改了某个变量的值，这新值对其他线程来说是立即可见的。
-
-    2）禁止进行指令重排序。
-2.synchronized关键字是防止多个线程同时执行一段代码，那么就会很影响程序执行效率，而volatile关键字在某些情况下性能要优于synchronized，但是要注意volatile关键字是无法替代synchronized关键字的，因为volatile关键字无法保证操作的原子性。通常来说，使用volatile必须具备以下2个条件：
-
-    1）对变量的写操作不依赖于当前值
-
-    2）该变量没有包含在具有其他变量的不变式中
-</code></pre><p>三、java内存模型</p>
-<p>四、HashMap为什么是线程不安全的<br>    1.死循环reSize()<br>        HashMap 的死锁问题就出在这个transfer()函数上，数据转移。<br>    2.file-fast<br>        在多线程环境下，如果多个线程操作集合的时候，在使用迭代器的过程中有其他线程修改了map，那么将抛出ConcurrentModificationException，这就是所谓fail-fast事件</p>
-<p>五、ConcurrentHashMap 和HashMap 有什么区别<br>    1.ConcurrentHashMap线程安全的，它引入了一个“分段锁”的概念。（jdk1.5以后，jdk1.4以前hashtable），ConcurrentHashMap的工作机制，通过把整个Map分为N个Segment（类似HashTable），可以提供相同的线程安全，但是效率提升N倍，默认提升16倍<br>    2.HashMap线程不安全</p>
-
-            <div class="clearfix"></div>
-            <hr class="nogutter">
-        </div>
-        <nav class="clearfix">
-            <nav class="pagination" role="pagination">
-    
-    <a class="pull-left" href="/2017/10/09/Spring-实战/" style="float: left;">
-        ← Spring 实战
-    </a>
-    
-    
-    <a class="pull-right" href="/2017/09/15/Spring-Boot快速入门之Hello-Word（一）/">
-        Spring Boot快速入门之Hello Word（一） →
-    </a>
-    
-</nav>
-
-        </nav>
-        <div class="duoshuo" style="padding-top:30px">
-            <div id="cyReward" role="cylabs" data-use="reward" style="text-align:center"></div>
-            <!-- 畅言评论框 start -->
-<div id="SOHUCS" sid="undefined" style="padding: 0px 30px 0px 46px;"></div>
-<!-- 畅言评论框 end -->
-<script type="text/javascript"> 
-(function(){ 
-var appid = 'cyt8ELT4g'; 
-var conf = 'prod_7d9bc5076718eb3f413bf4277ad59436'; 
-var width = window.innerWidth || document.documentElement.clientWidth; 
-if (width < 960) { 
-window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
-        </div>
+        <div class="herofade beige-dk"></div>
     </div>
-        <script type="text/javascript" charset="utf-8" src="https://changyan.itc.cn/js/lib/jquery.js"></script>
-        <script type="text/javascript" charset="utf-8" src="https://changyan.sohu.com/js/changyan.labs.https.js?appid=cytaHjVBa"></script>
 </section>
 
+<!-- Height spacing helper -->
+<div class="heightblock"></div>
+<!-- // End height spacing helper -->
 
+<!-- ============================ END Hero Image =========================== -->
+
+
+
+
+<section id="services">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="row boxes">
+                    
+                    
+                        
+                        
+                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
+                            
+                              <h4 class="title"><a href="/2019/03/19/java多线程之内存可见性/">java多线程之内存可见性</a></h4>
+                            
+                            <p><time datetime="2019-03-19T13:18:27.000Z"><a href="/2019/03/19/java多线程之内存可见性/">2019-03-19</a></time></p>
+                        </div>
+                    
+                </div>
+            </div>    
+        </div>
+    </div>
+</section> 
+
+<section id="statement">
+    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
+        <div class="row">
+            <p>你不将就一切都时候，生活自然会厚爱于你。</p>
+        </div>
+    </div>
+</section>
       
 <!-- ============================ Footer =========================== -->
 
