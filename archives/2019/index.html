@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>心若向善，处处都是阳光</title>
+  <title>Archives: 2019 | 心若向善，处处都是阳光</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -225,340 +225,32 @@
 <!-- // End height spacing helper -->
 
 <!-- ============================ END Hero Image =========================== -->
-<!-- ============================ Content =========================== -->
 
-<section id="intro">
+
+
+
+<section id="services">
     <div class="container">
-        
         <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2019/06/19/java多线程环境下竞态条件的问题/">java多线程环境下竞态条件的问题</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2019-06-19T05:28:27.000Z" itemprop="datePublished">
-          2019-06-19
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        一、什么是竞态条件在java多线程中，当两个或两个以上的线程对同一个数据（共享变量，数据库中表存储的数据）进行操作的时候，竞态条件会导致程序在并发情况下出现一些bugs，即不是我们预期的正确的结果二、什么情况下会出现小编在工作中就遇到了这个问题，简单说明一下，多线程去读写redis中存储的url链接，假设有10000条，10个线程去读写，每次读1000条，并且把读取过的删除掉（由于业务需要，逻辑删除，置一个不再读取的状态），理论上10个
-                      
-                    </p>
+            <div class="col-md-10 col-md-offset-1">
+                <div class="row boxes">
                     
-                    <p class="pull-right readMore">
-                        <a href="/2019/06/19/java多线程环境下竞态条件的问题/">阅读更多...</a>
-                    </p>
                     
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2017/11/28/Spring-Boot快速入门之连接Mysql集成redis做缓存（二）/">Spring-Boot快速入门之连接Mysql集成redis做缓存（二）</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2017-11-28T03:03:36.000Z" itemprop="datePublished">
-          2017-11-28
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        一、缓存的应用场景什么是缓存？在互联网场景下，尤其 高并发大流量场景下，需要将一些经常展现和不会频繁变更的数据，存放在存取速率更快的地方。缓存就是一个存储器，在技术选型中，常用 Redis 作为缓存数据库。一是缓存主要是在获取资源方便性能优化的关键方面，二是减少海量的频繁的数据库IO操作。
-Redis 是一个高性能的 key-value 数据库。GitHub 地址：https://github.com/antirez/redis 。百度
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2017/11/28/Spring-Boot快速入门之连接Mysql集成redis做缓存（二）/">阅读更多...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2017/11/22/java多线程之内存可见性/"></a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2017-11-22T03:42:41.177Z" itemprop="datePublished">
-          2017-11-22
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
                         
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2017/11/22/java多线程之内存可见性/">阅读更多...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2017/11/17/Spring集成Quartz编写定时任务调度器/">Spring集成Quartz编写定时任务调度器</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2017-11-17T03:47:07.000Z" itemprop="datePublished">
-          2017-11-17
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
                         
-新老系统更换，现在新系统有一个功能，就是把客服做完的订单，点击同步上传到电商平台，经销商最终要核对病人信息的（如下图）。由于新系统刚上线一周，全国分仓的同事不熟悉新系统的操作，有人忘记点同步上传，一星期下来积累了大约1000多个单子，考虑到全部由客服手动再次上传，费时费力又费财。由于此功能就是自己开发，所以领导商量，还是由我写一个定时任务来替他们完成订单上传。
-接到任务说干就干，自己是下午四点多接到任务的，领导给了两天的时间来完成，由
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2017/11/17/Spring集成Quartz编写定时任务调度器/">阅读更多...</a>
-                    </p>
+                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
+                            
+                              <h4 class="title"><a href="/2019/06/19/java多线程环境下竞态条件的问题/">java多线程环境下竞态条件的问题</a></h4>
+                            
+                            <p><time datetime="2019-06-19T05:28:27.000Z"><a href="/2019/06/19/java多线程环境下竞态条件的问题/">2019-06-19</a></time></p>
+                        </div>
                     
                 </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
+            </div>    
         </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2017/10/09/Spring-实战/">Spring 实战</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2017-10-09T06:19:11.000Z" itemprop="datePublished">
-          2017-10-09
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        一、spring IOC:1.概念：
-所谓控制反转，即依赖关系的获取方式反过来了。
-所谓依赖，从程序的角度看，就是比如A要调用B的方法，那么A就依赖于B。
-所谓反转（inversion），你必须理解如果不反转，会怎么着，如果不反转，意思就是A主动获取B的实例：B b = new B()，这就是最简单的获取B实例的方法，然后你就可以调用b对象了。所以，不反转，意味着A要主动获取B，才能使用B；到了这里，你就应该明白了反转的意思了。反转就是
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2017/10/09/Spring-实战/">阅读更多...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2017/09/26/java-基础知识总结（重点）/">java 基础知识总结（重点）</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2017-09-26T10:30:10.000Z" itemprop="datePublished">
-          2017-09-26
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        一、static关键字    1.Static只可以修饰类的成员变量，不可以修饰局部变量    2.被 static 所修饰的属性、方法或者内部类，可以使用类名.属性、类名.方法以及类名.内部类名来直接引用，无需创建实例    3.类属性中被 static 所引用的变量，会被作为 GC 的 root 根节点。作为根节点就意味着，这一类变量是基本上不会被回收的。因此，static 很容易引入内存泄漏的风险，要根据 情况谨慎使用      
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2017/09/26/java-基础知识总结（重点）/">阅读更多...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2017/09/15/Spring-Boot快速入门之Hello-Word（一）/">Spring Boot快速入门之Hello Word（一）</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2017-09-15T06:40:56.000Z" itemprop="datePublished">
-          2017-09-15
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        
-Spring Boot是由Pivotal团队提供的全新框架，其设计目的是用来简化新Spring应用的初始搭建以及开发过程。该框架使用了特定的方式来进行配置，从而使开发人员不再需要定义样板化的配置。通过这种方式，Boot致力于在蓬勃发展的快速应用开发领域（rapid application development）成为领导者。
-大家在第1次接触或者学习Spring框架的时候，是否因为其繁杂的配置而退却了？反正我是这样，还记得那时候一脸懵
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2017/09/15/Spring-Boot快速入门之Hello-Word（一）/">阅读更多...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2017/08/30/Jackson-高性能的JSON处理/">java下Jackson 高性能的JSON处理</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2017-08-30T08:04:01.000Z" itemprop="datePublished">
-          2017-08-30
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        
-大家也知道，json 在如今互联网时代应用的非常广，无论是前端与后端数据交互，Android，iOS移动开发，json无处不在。因为大家如此的关注，所以对json的解析性能要求也是非常高的。
-
-java下常用的json类库有：Jackson，FastJson，Gson
-
-FastJson 阿里巴巴公司开源的速度最快的Json和对象转换工具
-Gson 是google开发的一款解析Json的一个开源框架
-Jackson:我们今天的男一号，
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2017/08/30/Jackson-高性能的JSON处理/">阅读更多...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2017/08/30/HashMap实现原理及源码分析/">HashMap实现原理及源码分析</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2017-08-30T06:09:45.000Z" itemprop="datePublished">
-          2017-08-30
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        哈希表也叫做散列表，我们知道，数据结构的物理存储结构只有两种：顺序存储结构和链式存储结构（像栈，队列，树，图等是从逻辑结构去抽象的，映射到内存中，也这两种物理组织形式），而在上面我们提到过，在数组中根据下标查找某个元素，一次定位就可以达到，哈希表利用了这种特性，哈希表的主干就是数组。
-然而万事无完美，如果两个不同的元素，通过哈希函数得出的实际存储地址相同怎么办？也就是说，当我们对某个元素进行哈希运算，得到一个存储地址，然后要进行插入的时
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2017/08/30/HashMap实现原理及源码分析/">阅读更多...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2017/08/20/Linux-CentOS7-搭建SVN服务器/">Linux(CentOS7)搭建SVN服务器</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2017-08-20T14:02:07.000Z" itemprop="datePublished">
-          2017-08-20
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        
-如果说在互联网大行其道的今天什么东西最博人眼球，无疑是人工智能，云计算，大数据，机器学习，深度学习，VR等等……
-
-2017年也无疑是翻天覆地的一年。Alpha Go大战柯洁，围棋领域中人类的最强大脑也不幸落败……
-马云爸爸的无人超市，无人支付，无现金社会席卷而来……
-百度老总李彦宏亲自把无人驾驶汽车开上五环……
-繁华的城市街头，随处可见的共享宝马，共享奥迪，共享单车…..
-这些以前你想都不敢想的，正在以所向披靡的速度走进我们的生活，
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2017/08/20/Linux-CentOS7-搭建SVN服务器/">阅读更多...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <nav class="pagination" role="pagination">
-          
-          <a class="pull-right" href="/page/2/">下一页 →</a>
-        </nav>
     </div>
-</section>
+</section> 
+
 <section id="statement">
     <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
         <div class="row">
@@ -566,8 +258,6 @@ Jackson:我们今天的男一号，
         </div>
     </div>
 </section>
-<!-- ============================ END Content =========================== -->
-
       
 <!-- ============================ Footer =========================== -->
 
