@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>心若向善，处处都是阳光</title>
+  <title>Mybatis连接Oracle数据库进行批量插入，更新 | 心若向善，处处都是阳光</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -198,116 +198,136 @@
         <!-- ============================ Header & Logo bar =========================== -->
 
 
-      <!-- ============================ Hero Image =========================== -->
-
-<section id="hero" class="scrollme">
-    <div class="container-fluid element-img" style="background: url(/img/lang.jpg) no-repeat center center fixed;background-size: cover">
-        <div class="row">
-            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
-                <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
-                    <div>
-                        
-                        <h2><span>每一个不曾起舞的日子都是对生命的辜负，我终将变得更好</span></h2>
-                        <p></p>
-                        
-
-                    </div>
-                </div>
-            </div>
-            <!-- // .col-md-12 -->
-        </div>
-        <div class="herofade beige-dk"></div>
-    </div>
-</section>
-
-<!-- Height spacing helper -->
-<div class="heightblock"></div>
-<!-- // End height spacing helper -->
-
-<!-- ============================ END Hero Image =========================== -->
+      
 <section id="intro">
     <div class="container">
         <div class="row col-md-offset-2">
             <div class="col-md-8">
-                <h1></h1>
+
+                <h1>Mybatis连接Oracle数据库进行批量插入，更新</h1>
+                发表于<span class="post-meta">
+      <time datetime="2017-08-09T15:17:42.000Z" itemprop="datePublished">
+          2017-08-09
+      </time>
+    
+</span>
+                <span id="busuanzi_container_page_pv">&nbsp&nbsp&nbsp&nbsp阅读次数：
+                    <span id="busuanzi_value_page_pv"></span>次
+                </span>
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-            <span style="font-size:14px;"><html>  
-    <head>  
-         <meta http-equiv="Content-Type" content="text/html; charset=" utf-8"="">  
-         <title>公益404</title>                                                                                                                                          
-    </head>  
-    <body>  
-         <script type="text/javascript" src="http://www.qq.com/404/search_children.js" charset="utf-8" homepageurl="http://langjianwei.top/" homepagename="回到我的主页"></script>  
-    </body>  
-</html></span> 
+      		<ul>
+<li>在工作过程中，由于项目的特殊性（OMS系统），需要进行大量的保存，更新操作。根据公司业务需求，现在对项目进行从SqlServer到Oracle数据库的迁移。虽然只是换了数据库，但是原来的业务逻辑是不能改变的，因此参考老系统代码熟悉业务逻辑。</li>
+<li>但是，在参考老项目的时候发现了一个很严重的问题。一段保存订单信息的代码中，老系统的前辈用了mybatis配置生成的mapper文件来进行增删改查，但问题也就出在这里。一条订单信息里面包含了表头，表身，附加信息，订单产品等所有的信息。光表身里面存的就有100多条数据。调用mapper文件生成的insert语句来保存信息，需要对数据库进行频繁的获取Session，获取连接，有多少条数据就要执行多少次inset into…….语句，而且可能数据量大了还有可能出现异常，这对程序性能是有很大的影响的。</li>
+<li>所以，自己在新系统的设计上，把所有的多条数据的更新、保存全部换成了批量操作。现在直接上代码，下面再讲解用法和工作中遇到的问题。</li>
+<li><p>后台主要业务代码：</p>
+<ul>
+<li>新建list集合接收，遍历前台传过来的数据：<pre><code>List&lt;TfPos&gt; tfPosList = new ArrayList&lt;TfPos&gt;(resource.getParams().size());
+ //表身的itm
+ int itm = 1;
+ for (TfPos params : resource.getParams()) {
+     params.setPreEstDd(today);
+     params.setEstDd(today);
+     params.setItm(itm);
+     params.setEstItm(itm);
+     params.setPreItm(itm);
+     params.setOsNo(resource.getOsNo());
+     if(!resource.getDsptFlg().equals(&quot;1&quot;)){
+         qty = params.getQty();
+         params.setQty(params.getQtyVerify());
+     }
+     tfPosList.add(params);
+     itm++;
+ }
+ //保存数据到表身
+ commonService.save(&quot;com.ifm.mappers.operation.orderInput.tfPos&quot;, tfPosList);
+</code></pre></li>
+<li>批量保存：<pre><code>&lt;insert id=&quot;tfPos_insert&quot; parameterType=&quot;list&quot;&gt;
+              INSERT INTO TF_POS (
+                   OS_ID,
+                   OS_NO,
+                   ITM,
+                   PRD_NO,
+                   PRD_NAME,
+                   QTY,
+                   QTY_VERIFY
+                  )
+      &lt;foreach collection=&quot;list&quot; item=&quot;item&quot; index=&quot;index&quot; separator=&quot;UNION ALL&quot; &gt;
+                select
+                    &apos;SO&apos;,
+                    #{item.osNo},
+                    #{item.itm},
+                    #{item.prdNo},
+                    #{item.prdName},
+                    #{item.qty},
+                    #{item.qtyVerify}
+                from dual
+        &lt;/foreach&gt;
+&lt;/insert&gt; 
+</code></pre></li>
+<li>前台传过来一共2356条数据，把这些封装在list里面，批量插入打印的log日志查看，用时不到0.3秒。</li>
+<li><p>批量更新和插入一样，这里就不贴业务代码了，只看一下sql：</p>
+<pre><code>&lt;update id=&quot;orderAttach_update&quot;  parameterType=&quot;list&quot;&gt;  
+             &lt;foreach collection=&quot;list&quot; item=&quot;item&quot; index=&quot;index&quot; open=&quot;begin&quot; close=&quot;;end;&quot; separator=&quot;;&quot;&gt;
+                        update GKHT_DSPT_ORDERATTACH t 
+                             set 
+                                t.ATTACHVALUE=#{item.attachValue,jdbcType=VARCHAR}
+                             where t.ORDERCODE = #{item.osNo,jdbcType=VARCHAR}
+                             and t.ATTACHNAME= #{item.attachName,jdbcType=VARCHAR}
+            &lt;/foreach&gt;
+&lt;/update&gt;  
+</code></pre></li>
+<li><p>foreach主要用在构建in条件中，它可以在SQL语句中进行迭代一个集合。</p>
+</li>
+<li><p>foreach元素的属性主要有 item，index，collection，open，separator，close。<br>1 . item表示集合中（代码里list集合里封装bean：TfPos）每一个元素进行迭代时的别名，<br>2 . index指定一个名字，用于表示在迭代过程中，每次迭代到的位置，<br>3 . open表示该语句以什么开始，<br>4 . separator表示在每次进行迭代之间以什么符号作为分隔符，<br>5 . close表示以什么结束，</p>
+</li>
+<li><p>在使用foreach的时候最关键的也是最容易出错的就是collection属性，该属性是必须指定的，但是在不同情况下，该属性的值是不一样的，主要有一下3种情况：<br>  1 .如果传入的是单参数且参数类型是一个List的时候，collection属性值为list<br>  2 .如果传入的是单参数且参数类型是一个array数组的时候，collection的属性值为array<br>  3 .如果传入的参数是多个的时候，我们就需要把它们封装成一个Map了，当然单参数也可以封装成map</p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>运行通过。在Oracle的版本中，有几点需要注意的：<br>   1 .SQL中没有VALUES；<br>   2 .<foreach>标签中的(selece ….. from dual)，oracle专有；<br>   3 .<foreach>标签中的separator的属性为”UNION ALL”，将查询合并结果集。</foreach></foreach></li>
+</ul>
+<p><code>关于作者</code><br>在兴趣的驱动下,写一个<code>免费</code>的东西，有欣喜，也还有汗水，希望您能喜欢我的作品，尊重原创，共同进步</p>
+
             <div class="clearfix"></div>
+            <hr class="nogutter">
         </div>
-        
-    </div>
-</section>
-<section id="process">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
-                <div class="timeline-centered">
-                    <div class="line"></div>
-                    <div class="present">Past</div>
-                    <div class="dot_tp"></div>
-                    <div class="born">Now</div>
-                    <div class="dot_bt"></div>
-                    
-                        <div class="timeline-entry">
-                            <div class="timeline-entry-inner">
-                                <div class="timeline-icon wow fadeInUp" data-wow-delay="0.2s">
-                                    <span class="number">1</span>
-                                </div>
-                                <div class="timeline-label wow fadeInUp" data-wow-delay="0.2s">
-                                    <p>2014/06/12-Start</p>
-                                </div>
-                            </div>
-                        </div>
-                    
-                        <div class="timeline-entry">
-                            <div class="timeline-entry-inner">
-                                <div class="timeline-icon wow fadeInUp" data-wow-delay="0.2s">
-                                    <span class="number">2</span>
-                                </div>
-                                <div class="timeline-label wow fadeInUp" data-wow-delay="0.2s">
-                                    <p>2014/11/29-XXX</p>
-                                </div>
-                            </div>
-                        </div>
-                    
-                        <div class="timeline-entry">
-                            <div class="timeline-entry-inner">
-                                <div class="timeline-icon wow fadeInUp" data-wow-delay="0.2s">
-                                    <span class="number">3</span>
-                                </div>
-                                <div class="timeline-label wow fadeInUp" data-wow-delay="0.2s">
-                                    <p>2015/02/18-DDD</p>
-                                </div>
-                            </div>
-                        </div>
-                    
-                        <div class="timeline-entry">
-                            <div class="timeline-entry-inner">
-                                <div class="timeline-icon wow fadeInUp" data-wow-delay="0.2s">
-                                    <span class="number">4</span>
-                                </div>
-                                <div class="timeline-label wow fadeInUp" data-wow-delay="0.2s">
-                                    <p>More</p>
-                                </div>
-                            </div>
-                        </div>
-                    
-                </div>
-                <!-- timeline-centered -->
-            </div>
+        <nav class="clearfix">
+            <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2017/08/18/java调用webService接口的几种常用方法/" style="float: left;">
+        ← java调用webService接口的几种常用方法
+    </a>
+    
+    
+    <a class="pull-right" href="/2017/08/06/Ext-Js之获取grid中所有数据/">
+        Ext Js之获取grid中所有数据 →
+    </a>
+    
+</nav>
+
+        </nav>
+        <div class="duoshuo" style="padding-top:30px">
+            <div id="cyReward" role="cylabs" data-use="reward" style="text-align:center"></div>
+            <!-- 畅言评论框 start -->
+<div id="SOHUCS" sid="undefined" style="padding: 0px 30px 0px 46px;"></div>
+<!-- 畅言评论框 end -->
+<script type="text/javascript"> 
+(function(){ 
+var appid = 'cyt8ELT4g'; 
+var conf = 'prod_7d9bc5076718eb3f413bf4277ad59436'; 
+var width = window.innerWidth || document.documentElement.clientWidth; 
+if (width < 960) { 
+window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
         </div>
     </div>
+        <script type="text/javascript" charset="utf-8" src="https://changyan.itc.cn/js/lib/jquery.js"></script>
+        <script type="text/javascript" charset="utf-8" src="https://changyan.sohu.com/js/changyan.labs.https.js?appid=cytaHjVBa"></script>
 </section>
+
 
       
 <!-- ============================ Footer =========================== -->

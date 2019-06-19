@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>心若向善，处处都是阳光</title>
+  <title>java调用webService接口的几种常用方法 | 心若向善，处处都是阳光</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -198,116 +198,180 @@
         <!-- ============================ Header & Logo bar =========================== -->
 
 
-      <!-- ============================ Hero Image =========================== -->
-
-<section id="hero" class="scrollme">
-    <div class="container-fluid element-img" style="background: url(/img/lang.jpg) no-repeat center center fixed;background-size: cover">
-        <div class="row">
-            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
-                <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
-                    <div>
-                        
-                        <h2><span>每一个不曾起舞的日子都是对生命的辜负，我终将变得更好</span></h2>
-                        <p></p>
-                        
-
-                    </div>
-                </div>
-            </div>
-            <!-- // .col-md-12 -->
-        </div>
-        <div class="herofade beige-dk"></div>
-    </div>
-</section>
-
-<!-- Height spacing helper -->
-<div class="heightblock"></div>
-<!-- // End height spacing helper -->
-
-<!-- ============================ END Hero Image =========================== -->
+      
 <section id="intro">
     <div class="container">
         <div class="row col-md-offset-2">
             <div class="col-md-8">
-                <h1></h1>
+
+                <h1>java调用webService接口的几种常用方法</h1>
+                发表于<span class="post-meta">
+      <time datetime="2017-08-18T09:41:55.000Z" itemprop="datePublished">
+          2017-08-18
+      </time>
+    
+</span>
+                <span id="busuanzi_container_page_pv">&nbsp&nbsp&nbsp&nbsp阅读次数：
+                    <span id="busuanzi_value_page_pv"></span>次
+                </span>
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-            <span style="font-size:14px;"><html>  
-    <head>  
-         <meta http-equiv="Content-Type" content="text/html; charset=" utf-8"="">  
-         <title>公益404</title>                                                                                                                                          
-    </head>  
-    <body>  
-         <script type="text/javascript" src="http://www.qq.com/404/search_children.js" charset="utf-8" homepageurl="http://langjianwei.top/" homepagename="回到我的主页"></script>  
-    </body>  
-</html></span> 
+      		<h5 id="需求分析：由于系统改进，需要和其他公司多系统进行联调开发，系统之间的数据交互通过调用彼此的webService接口，webService主要解决了不同的系统或者调用分布部署的数据处理问题"><a href="#需求分析：由于系统改进，需要和其他公司多系统进行联调开发，系统之间的数据交互通过调用彼此的webService接口，webService主要解决了不同的系统或者调用分布部署的数据处理问题" class="headerlink" title="* 需求分析：由于系统改进，需要和其他公司多系统进行联调开发，系统之间的数据交互通过调用彼此的webService接口，webService主要解决了不同的系统或者调用分布部署的数据处理问题"></a>* 需求分析：由于系统改进，需要和其他公司多系统进行联调开发，系统之间的数据交互通过调用彼此的webService接口，webService主要解决了不同的系统或者调用分布部署的数据处理问题</h5><ul>
+<li><p>现在总结一下，在开发过程中常用的三种调用接口方式，废话少说，直接撸代码，简单粗暴，哈哈：<br>1 .采用http协议发送请求</p>
+<ul>
+<li><p>使用过webservice的童鞋大概都明白它是基于Soap协议交换数据的，同时Soap协议是对HTTP协议的扩展，其实我们就可以认为调用一个WEB服务就是通过http协议GET或POST数据的过程，只不过中间的输入/输出数据是遵守Soap协议格式的标准XML。明白这个道理之后我们就可以通过构造请求数据来模拟调用WEB服务的过程了</p>
+<pre><code>public static String doPost(String url,String method, String params) throws     IOException {  
+   URL urlCon=new URL(url);
+   //建立http连接
+   HttpURLConnection    conn = (HttpURLConnection) urlCon.openConnection();
+   //是否具有输入参数
+   conn.setDoInput(true);
+   //是否输出输入参数
+   conn.setDoOutput(true);
+   //发POST请求
+   conn.setRequestMethod(&quot;POST&quot;);
+   //设置请求头（注意一定是xml格式）
+   conn.setRequestProperty(&quot;content-type&quot;, &quot;text/xml;charset=utf-8&quot;);
+   //设置用户名密码，esb认证
+   String username = &quot;esb_oms01&quot;;
+   String password = &quot;gkht_7890&quot;;
+   String input = username + &quot;:&quot; + password; 
+   //对其进行加密
+   byte[] base64 = Base64.encodeBase64(input.getBytes());          
+   String strBase64 = new String(base64);
+   //httpBasic认证
+   String authorization = &quot;Basic &quot;+strBase64;
+   conn.setRequestProperty( &quot;Authorization&quot;,authorization); 
+   // 构造请求体，符合SOAP规范（最重要的）
+   String requestBody = &quot;&lt;soapenv:Envelope xmlns:soapenv=\&quot;http://schemas.xmlsoap.org/soap/envelope/\&quot; xmlns:axis=\&quot;http://ws.apache.org/axis2\&quot;&gt;&quot;
+       + &quot;&lt;soapenv:Header/&gt;&quot;
+       + &quot;&lt;soapenv:Body&gt;&quot;
+       + &quot;&lt;axis:&quot;+method+&quot;&gt;&quot; //你要访问的接口方法
+       +&quot;&lt;!--Optional:--&gt;&quot;
+       + &quot;&lt;sData&gt;&quot;
+       + params                 //参数
+       + &quot;&lt;/sData&gt;&quot;
+       + &quot;&lt;/axis:&quot;+method+&quot;&gt;&quot;//你要访问的接口方法
+       + &quot;&lt;/soapenv:Body&gt;&quot;
+       + &quot;&lt;/soapenv:Envelope&gt;&quot;;
+
+   //获得一个输出流
+   OutputStream out = conn.getOutputStream();
+   out.write(requestBody.getBytes());
+   System.out.println(requestBody);
+   //获得服务端响应状态码
+   int code = conn.getResponseCode();
+   StringBuffer sb = new StringBuffer();
+   if(code == 200){
+       //获得一个输入流，读取服务端响应的数据
+       InputStream is = conn.getInputStream();
+       byte[] b = new byte[1024];
+       int len = 0;
+       while((len = is.read(b)) != -1){
+       String s = new String(b,0,len,&quot;utf-8&quot;);
+       sb.append(s);
+   }
+   is.close();
+   }else {
+   System.out.println(&quot;接口调用失败&quot;+code);
+   }
+   //关闭连接
+   out.close();
+   System.out.println(&quot;服务端响应数据为：&quot;+sb.toString());
+  //定义返回结果
+   String result=sb.toString();
+   return result;
+   } 
+</code></pre></li>
+</ul>
+<p>2 .采用axis2来调用</p>
+<ul>
+<li><p>Axis2是一套崭新的WebService引擎，该版本是对Axis1.x重新设计的产物。Axis2不仅支持SOAP1.1和SOAP1.2，还集成了非常流行的REST WebService，同时还支持Spring、JSON等技术</p>
+<pre><code>//使用axis2调用ebs工具接口
+try {  
+        ServiceClient sc = new ServiceClient();  
+        Options opts = sc.getOptions();  
+        opts.setTo(new EndpointReference(esbUrl+&quot;/SalesSB/SaleOrder/Gjgl/ProxyServices/SalesGjglToolOrderSyncSoapProxy&quot;));  
+        opts.setAction(&quot;urn:ToolsOutNotice&quot;);  
+        HttpTransportProperties.Authenticator basicAuth = new HttpTransportProperties.Authenticator();  
+        basicAuth.setUsername(&quot;esb_oms01&quot;);  
+        basicAuth.setPassword(&quot;gkht_7890&quot;);  
+        opts.setProperty(HTTPConstants.AUTHENTICATE, basicAuth);  
+        OMElement res = sc.sendReceive(createPayLoad(params));  
+        System.out.println(res);  
+} catch (AxisFault e) {  
+        e.printStackTrace();
+} 
+</code></pre></li>
+</ul>
+<p>3 .使用cxf来调用：</p>
+<ul>
+<li>Apache CXF是一个开源的，全功能的，容易使用的Web服务框架<pre><code>JaxWsDynamicClientFactory factory = JaxWsDynamicClientFactory.newInstance();
+Client client = factory.createClient(DSPTWeb+&quot;/wisi-oms-ws/ws/OrderAccessService?wsdl&quot;);
+Object[] objs=null;
+try {
+        objs = client.invoke(&quot;searchOrder&quot;);
+        System.out.println(objs[0].toString());
+        ObjectMapper objectMapper=new ObjectMapper();
+        //接收电商传过来的订单
+        OrderList orderList =objectMapper.readValue(objs[0].toString(), OrderList.class); 
+        List&lt;Order&gt;list=orderList.getOrderList();
+        //遍历所有的订单
+        for(Order order : list){
+                。
+                。
+                。
+          遍历解析代码省略...
+                。
+                。
+                。
+            }
+} catch (Exception e) {
+        throw new SysException(&quot;调用接口失败，请重新获取订单&quot;);
+}
+</code></pre></li>
+</ul>
+</li>
+</ul>
+<p><code>关于作者</code><br>在兴趣的驱动下,写一个<code>免费</code>的东西，有欣喜，也还有汗水，希望您能喜欢我的作品，尊重原创，共同进步</p>
+
             <div class="clearfix"></div>
+            <hr class="nogutter">
         </div>
-        
-    </div>
-</section>
-<section id="process">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
-                <div class="timeline-centered">
-                    <div class="line"></div>
-                    <div class="present">Past</div>
-                    <div class="dot_tp"></div>
-                    <div class="born">Now</div>
-                    <div class="dot_bt"></div>
-                    
-                        <div class="timeline-entry">
-                            <div class="timeline-entry-inner">
-                                <div class="timeline-icon wow fadeInUp" data-wow-delay="0.2s">
-                                    <span class="number">1</span>
-                                </div>
-                                <div class="timeline-label wow fadeInUp" data-wow-delay="0.2s">
-                                    <p>2014/06/12-Start</p>
-                                </div>
-                            </div>
-                        </div>
-                    
-                        <div class="timeline-entry">
-                            <div class="timeline-entry-inner">
-                                <div class="timeline-icon wow fadeInUp" data-wow-delay="0.2s">
-                                    <span class="number">2</span>
-                                </div>
-                                <div class="timeline-label wow fadeInUp" data-wow-delay="0.2s">
-                                    <p>2014/11/29-XXX</p>
-                                </div>
-                            </div>
-                        </div>
-                    
-                        <div class="timeline-entry">
-                            <div class="timeline-entry-inner">
-                                <div class="timeline-icon wow fadeInUp" data-wow-delay="0.2s">
-                                    <span class="number">3</span>
-                                </div>
-                                <div class="timeline-label wow fadeInUp" data-wow-delay="0.2s">
-                                    <p>2015/02/18-DDD</p>
-                                </div>
-                            </div>
-                        </div>
-                    
-                        <div class="timeline-entry">
-                            <div class="timeline-entry-inner">
-                                <div class="timeline-icon wow fadeInUp" data-wow-delay="0.2s">
-                                    <span class="number">4</span>
-                                </div>
-                                <div class="timeline-label wow fadeInUp" data-wow-delay="0.2s">
-                                    <p>More</p>
-                                </div>
-                            </div>
-                        </div>
-                    
-                </div>
-                <!-- timeline-centered -->
-            </div>
+        <nav class="clearfix">
+            <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2017/08/20/阿里云服务器CentOS-7-3-Firewall防火墙配置/" style="float: left;">
+        ← 阿里云服务器CentOS 7.3 Firewall防火墙配置
+    </a>
+    
+    
+    <a class="pull-right" href="/2017/08/09/Mybatis连接Oracle数据库进行批量插入，更新/">
+        Mybatis连接Oracle数据库进行批量插入，更新 →
+    </a>
+    
+</nav>
+
+        </nav>
+        <div class="duoshuo" style="padding-top:30px">
+            <div id="cyReward" role="cylabs" data-use="reward" style="text-align:center"></div>
+            <!-- 畅言评论框 start -->
+<div id="SOHUCS" sid="undefined" style="padding: 0px 30px 0px 46px;"></div>
+<!-- 畅言评论框 end -->
+<script type="text/javascript"> 
+(function(){ 
+var appid = 'cyt8ELT4g'; 
+var conf = 'prod_7d9bc5076718eb3f413bf4277ad59436'; 
+var width = window.innerWidth || document.documentElement.clientWidth; 
+if (width < 960) { 
+window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
         </div>
     </div>
+        <script type="text/javascript" charset="utf-8" src="https://changyan.itc.cn/js/lib/jquery.js"></script>
+        <script type="text/javascript" charset="utf-8" src="https://changyan.sohu.com/js/changyan.labs.https.js?appid=cytaHjVBa"></script>
 </section>
+
 
       
 <!-- ============================ Footer =========================== -->

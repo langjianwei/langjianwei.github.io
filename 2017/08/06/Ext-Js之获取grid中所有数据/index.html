@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>心若向善，处处都是阳光</title>
+  <title>Ext Js之获取grid中所有数据 | 心若向善，处处都是阳光</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -198,116 +198,91 @@
         <!-- ============================ Header & Logo bar =========================== -->
 
 
-      <!-- ============================ Hero Image =========================== -->
-
-<section id="hero" class="scrollme">
-    <div class="container-fluid element-img" style="background: url(/img/lang.jpg) no-repeat center center fixed;background-size: cover">
-        <div class="row">
-            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
-                <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
-                    <div>
-                        
-                        <h2><span>每一个不曾起舞的日子都是对生命的辜负，我终将变得更好</span></h2>
-                        <p></p>
-                        
-
-                    </div>
-                </div>
-            </div>
-            <!-- // .col-md-12 -->
-        </div>
-        <div class="herofade beige-dk"></div>
-    </div>
-</section>
-
-<!-- Height spacing helper -->
-<div class="heightblock"></div>
-<!-- // End height spacing helper -->
-
-<!-- ============================ END Hero Image =========================== -->
+      
 <section id="intro">
     <div class="container">
         <div class="row col-md-offset-2">
             <div class="col-md-8">
-                <h1></h1>
+
+                <h1>Ext Js之获取grid中所有数据</h1>
+                发表于<span class="post-meta">
+      <time datetime="2017-08-06T09:23:11.000Z" itemprop="datePublished">
+          2017-08-06
+      </time>
+    
+</span>
+                <span id="busuanzi_container_page_pv">&nbsp&nbsp&nbsp&nbsp阅读次数：
+                    <span id="busuanzi_value_page_pv"></span>次
+                </span>
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-            <span style="font-size:14px;"><html>  
-    <head>  
-         <meta http-equiv="Content-Type" content="text/html; charset=" utf-8"="">  
-         <title>公益404</title>                                                                                                                                          
-    </head>  
-    <body>  
-         <script type="text/javascript" src="http://www.qq.com/404/search_children.js" charset="utf-8" homepageurl="http://langjianwei.top/" homepagename="回到我的主页"></script>  
-    </body>  
-</html></span> 
+      		<ul>
+<li>ext是一个强大的js类库，也是一种基于MVC开发模式的前端框架，这种开发模式和java的MVC模式有着异曲同工之妙，我觉得还是很方便的。</li>
+<li><p>为了提高用户体验，优化程序性能，在执行保存操作之前在前台校验表身数据是否为空（即判断grid中数据记录是否大于0，如下图红色框住的部分：）如果为空，不允许进行下一步操作。</p>
+<p><img src="https://langjianwei.github.io/images/ext01.png" alt="“图01”"></p>
+</li>
+<li><p>页面主要布局除了左边，上面是一个from，下面是几个grid，现在我们要取到的就是订单录入这个grid，因为这里面存的表身数据。熟悉ext框架的都知道，每一个grid都对应绑定的一个Stroe来显示数据，所以，获取grid里面的数据也就是获取他对应的Stroe。上面直接上代码：</p>
+<pre><code>Ext.define(&apos;ifm.view.mDLSales.orderInput.orderInputDetailGrid&apos;, {
+         extend : &apos;Ext.container.Container&apos;,
+         alias : &apos;widget.orderInputDetailGrid&apos;,
+         layout : &apos;fit&apos;,
+         items: [{
+               xtype : &apos;utilGrid&apos;,
+               reference :&apos;inputGrid&apos;,
+        },
+       bind : {
+             store : &apos;{operation.orderInput.orderPlanDetail}&apos;
+       },
+   }]
+});
+</code></pre></li>
+<li>所以，我们只需在前端代码对应controller.js文件里来获取这个Stroe,并且判断Stroe里面的数据是否大于0：<pre><code>//判断表身是否为空
+var orderDetailStore = me.getStore(&apos;operation.orderInput.orderPlanDetail&apos;);
+if(orderDetailStore.getCount()&lt;=0){
+    Ext.Msg.alert(&apos;提示&apos;,&apos;表身产品信息为空，不允许存盘！&apos;);
+    return;
+}
+</code></pre></li>
+</ul>
+<p><code>关于作者</code><br>在兴趣的驱动下,写一个<code>免费</code>的东西，有欣喜，也还有汗水，希望您能喜欢我的作品，尊重原创，共同进步</p>
+
             <div class="clearfix"></div>
+            <hr class="nogutter">
         </div>
-        
-    </div>
-</section>
-<section id="process">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
-                <div class="timeline-centered">
-                    <div class="line"></div>
-                    <div class="present">Past</div>
-                    <div class="dot_tp"></div>
-                    <div class="born">Now</div>
-                    <div class="dot_bt"></div>
-                    
-                        <div class="timeline-entry">
-                            <div class="timeline-entry-inner">
-                                <div class="timeline-icon wow fadeInUp" data-wow-delay="0.2s">
-                                    <span class="number">1</span>
-                                </div>
-                                <div class="timeline-label wow fadeInUp" data-wow-delay="0.2s">
-                                    <p>2014/06/12-Start</p>
-                                </div>
-                            </div>
-                        </div>
-                    
-                        <div class="timeline-entry">
-                            <div class="timeline-entry-inner">
-                                <div class="timeline-icon wow fadeInUp" data-wow-delay="0.2s">
-                                    <span class="number">2</span>
-                                </div>
-                                <div class="timeline-label wow fadeInUp" data-wow-delay="0.2s">
-                                    <p>2014/11/29-XXX</p>
-                                </div>
-                            </div>
-                        </div>
-                    
-                        <div class="timeline-entry">
-                            <div class="timeline-entry-inner">
-                                <div class="timeline-icon wow fadeInUp" data-wow-delay="0.2s">
-                                    <span class="number">3</span>
-                                </div>
-                                <div class="timeline-label wow fadeInUp" data-wow-delay="0.2s">
-                                    <p>2015/02/18-DDD</p>
-                                </div>
-                            </div>
-                        </div>
-                    
-                        <div class="timeline-entry">
-                            <div class="timeline-entry-inner">
-                                <div class="timeline-icon wow fadeInUp" data-wow-delay="0.2s">
-                                    <span class="number">4</span>
-                                </div>
-                                <div class="timeline-label wow fadeInUp" data-wow-delay="0.2s">
-                                    <p>More</p>
-                                </div>
-                            </div>
-                        </div>
-                    
-                </div>
-                <!-- timeline-centered -->
-            </div>
+        <nav class="clearfix">
+            <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2017/08/09/Mybatis连接Oracle数据库进行批量插入，更新/" style="float: left;">
+        ← Mybatis连接Oracle数据库进行批量插入，更新
+    </a>
+    
+    
+    <a class="pull-right" href="/2017/07/25/解决Mybatis整合SpringMVC操作Oracle数据库insert-into-语句报ID不能为null/">
+        解决Mybatis整合SpringMVC操作Oracle数据库insert into 语句报ID不能为NULL →
+    </a>
+    
+</nav>
+
+        </nav>
+        <div class="duoshuo" style="padding-top:30px">
+            <div id="cyReward" role="cylabs" data-use="reward" style="text-align:center"></div>
+            <!-- 畅言评论框 start -->
+<div id="SOHUCS" sid="undefined" style="padding: 0px 30px 0px 46px;"></div>
+<!-- 畅言评论框 end -->
+<script type="text/javascript"> 
+(function(){ 
+var appid = 'cyt8ELT4g'; 
+var conf = 'prod_7d9bc5076718eb3f413bf4277ad59436'; 
+var width = window.innerWidth || document.documentElement.clientWidth; 
+if (width < 960) { 
+window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
         </div>
     </div>
+        <script type="text/javascript" charset="utf-8" src="https://changyan.itc.cn/js/lib/jquery.js"></script>
+        <script type="text/javascript" charset="utf-8" src="https://changyan.sohu.com/js/changyan.labs.https.js?appid=cytaHjVBa"></script>
 </section>
+
 
       
 <!-- ============================ Footer =========================== -->

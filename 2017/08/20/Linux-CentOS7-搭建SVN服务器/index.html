@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>心若向善，处处都是阳光</title>
+  <title>Linux(CentOS7)搭建SVN服务器 | 心若向善，处处都是阳光</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -198,116 +198,134 @@
         <!-- ============================ Header & Logo bar =========================== -->
 
 
-      <!-- ============================ Hero Image =========================== -->
-
-<section id="hero" class="scrollme">
-    <div class="container-fluid element-img" style="background: url(/img/lang.jpg) no-repeat center center fixed;background-size: cover">
-        <div class="row">
-            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
-                <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
-                    <div>
-                        
-                        <h2><span>每一个不曾起舞的日子都是对生命的辜负，我终将变得更好</span></h2>
-                        <p></p>
-                        
-
-                    </div>
-                </div>
-            </div>
-            <!-- // .col-md-12 -->
-        </div>
-        <div class="herofade beige-dk"></div>
-    </div>
-</section>
-
-<!-- Height spacing helper -->
-<div class="heightblock"></div>
-<!-- // End height spacing helper -->
-
-<!-- ============================ END Hero Image =========================== -->
+      
 <section id="intro">
     <div class="container">
         <div class="row col-md-offset-2">
             <div class="col-md-8">
-                <h1></h1>
+
+                <h1>Linux(CentOS7)搭建SVN服务器</h1>
+                发表于<span class="post-meta">
+      <time datetime="2017-08-20T14:02:07.000Z" itemprop="datePublished">
+          2017-08-20
+      </time>
+    
+</span>
+                <span id="busuanzi_container_page_pv">&nbsp&nbsp&nbsp&nbsp阅读次数：
+                    <span id="busuanzi_value_page_pv"></span>次
+                </span>
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-            <span style="font-size:14px;"><html>  
-    <head>  
-         <meta http-equiv="Content-Type" content="text/html; charset=" utf-8"="">  
-         <title>公益404</title>                                                                                                                                          
-    </head>  
-    <body>  
-         <script type="text/javascript" src="http://www.qq.com/404/search_children.js" charset="utf-8" homepageurl="http://langjianwei.top/" homepagename="回到我的主页"></script>  
-    </body>  
-</html></span> 
+      		<ul>
+<li><p>如果说在互联网大行其道的今天什么东西最博人眼球，无疑是人工智能，云计算，大数据，机器学习，深度学习，VR等等……</p>
+<ul>
+<li>2017年也无疑是翻天覆地的一年。Alpha Go大战柯洁，围棋领域中人类的最强大脑也不幸落败……</li>
+<li>马云爸爸的无人超市，无人支付，无现金社会席卷而来……</li>
+<li>百度老总李彦宏亲自把无人驾驶汽车开上五环……</li>
+<li>繁华的城市街头，随处可见的共享宝马，共享奥迪，共享单车…..</li>
+<li>这些以前你想都不敢想的，正在以所向披靡的速度走进我们的生活，改变我们的生活……</li>
+<li>哈哈，说的有点远了，这些东西好像没一样是自己发明的。唉，喝碗鸡汤揉揉犯困的脖子继续撸代码吧，呜呜呜……</li>
+</ul>
+</li>
+<li><p>前段时间搞了一个博客，服务器用的免费的GitHub（什么？作为程序猿你竟然不知道什么是GitHub？好吧，再喝一碗鸡汤补补气），说白了GitHub也不是严格意义上的服务器，他只是国外的一个开源代码托管的平台。自己把博客程序放在上面，别人访问的时候，加载速度总觉得有点慢，作为一名有着强迫症，而又重视用户体验，追求技术的小菜鸟开发者一枚，这完全是不能忍受的。我一定要改变它……就想着自己搭建服务器来提高用户体验，优化程序性能。说干就干，上阿里云买服务器，注册域名，网站备案（唉，说到这里又是一坑，自己每天忙得都没时间去打印店打印备案上传资料，至今备案都没通过……）。搭建环境要选择Linux或者Windows来作为操作系统，在这里自己建议作为程序猿一定要选择Linux，Linux作为开源精神世界的代表，未来也一定是开源的世界，别问我问什么，不然我又得喝碗鸡汤补补气。(哈哈，因为Windows是给普通人，面向大众用户的，图形傻瓜式操作嘛，不知道我这样说微软会不会打死我…）</p>
+</li>
+<li><p>说了这么多，终于到重点了，这么晚了还有人在撸代码吗？累成狗，呜呜呜……</p>
+<ul>
+<li>自己在工作中，和同事们也是使用SVN合作开发项目，管理提交代码的。所以先搭建一台svn服务器来保存数据，记录以后自己的Linux修炼之路。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>具体安装步骤如下：<br>1、准备环境</p>
+<pre><code>centos7
+</code></pre><p>2、安装svn</p>
+<pre><code>yum install subversion 
+安装好查看版本
+svnserve --version
+</code></pre><p> 3、创建版本库</p>
+<pre><code>先建目录
+mkdir /var/svn
+创建版本库
+cd /var/svn
+svnadmin create /var/svn/svnrepos
+cd svnrepos会看到自动生成的版本库文件：
+conf  db  format  hooks  locks  README.txt
+</code></pre><p>4、subversion目录说明</p>
+<pre><code>db目录：就是所有版本控制的数据存放文件。
+hooks目录：放置hook脚本文件的目录。
+locks目录：用来放置subversion见艰苦锁定数据的目录，用来追踪存取文件库的客户端。
+format文件：是一个文本文件，里面只放了一个整数，表示当前文件库配置的版本号。
+conf目录：是这个仓库的配置文件（仓库的用户访问账号、权限等）。
+</code></pre><p>5、进入conf目录（该svn版本库配置文件）</p>
+<pre><code>cd conf/
+authz文件是权限控制文件
+passwd是帐号密码文件
+svnserve.conf SVN服务配置文件
+</code></pre><p>6、设置帐号密码 </p>
+<pre><code>vi passwd
+在[users]块中添加用户和密码，格式：帐号=密码，如langjw=langjw
+</code></pre><p>7、设置权限 vi authz</p>
+<pre><code>在末尾添加如下代码：
+[/]
+langjw=rw (r：读，w：写) 注意：前面一定不要留有空格，上面也是
+</code></pre><p>8、修改svnserve.conf文件 vi svnserve.conf</p>
+<pre><code>打开下面的几个注释：
+anon-access = read #匿名用户可读
+auth-access = write #授权用户可写
+password-db = passwd #使用哪个文件作为账号文件
+authz-db = authz #使用哪个文件作为权限文件
+realm = /var/svn/svnrepos # 认证空间名，版本库所在目录
+</code></pre><p>9、启动svn版本库</p>
+<pre><code>svnserve -d -r /var/svn/svnrepos
+</code></pre><p>10、停止SVN命令</p>
+<pre><code>kill all svnserve
+</code></pre><p>11、 查看服务是否开启。</p>
+<pre><code>ps -ef |grep svn
+</code></pre><p>12、在windows上测试</p>
+<pre><code>新建文件夹，右键打开TortoiseSVN客户端，SVN checkout检出项目
+跳出授权认证，输入上面配置的用户名密码
+连接成功
+</code></pre></li>
+</ul>
+<p><code>关于作者</code><br>在兴趣的驱动下,写一个<code>免费</code>的东西，有欣喜，也还有汗水，希望您能喜欢我的作品，尊重原创，共同进步</p>
+
             <div class="clearfix"></div>
+            <hr class="nogutter">
         </div>
-        
-    </div>
-</section>
-<section id="process">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
-                <div class="timeline-centered">
-                    <div class="line"></div>
-                    <div class="present">Past</div>
-                    <div class="dot_tp"></div>
-                    <div class="born">Now</div>
-                    <div class="dot_bt"></div>
-                    
-                        <div class="timeline-entry">
-                            <div class="timeline-entry-inner">
-                                <div class="timeline-icon wow fadeInUp" data-wow-delay="0.2s">
-                                    <span class="number">1</span>
-                                </div>
-                                <div class="timeline-label wow fadeInUp" data-wow-delay="0.2s">
-                                    <p>2014/06/12-Start</p>
-                                </div>
-                            </div>
-                        </div>
-                    
-                        <div class="timeline-entry">
-                            <div class="timeline-entry-inner">
-                                <div class="timeline-icon wow fadeInUp" data-wow-delay="0.2s">
-                                    <span class="number">2</span>
-                                </div>
-                                <div class="timeline-label wow fadeInUp" data-wow-delay="0.2s">
-                                    <p>2014/11/29-XXX</p>
-                                </div>
-                            </div>
-                        </div>
-                    
-                        <div class="timeline-entry">
-                            <div class="timeline-entry-inner">
-                                <div class="timeline-icon wow fadeInUp" data-wow-delay="0.2s">
-                                    <span class="number">3</span>
-                                </div>
-                                <div class="timeline-label wow fadeInUp" data-wow-delay="0.2s">
-                                    <p>2015/02/18-DDD</p>
-                                </div>
-                            </div>
-                        </div>
-                    
-                        <div class="timeline-entry">
-                            <div class="timeline-entry-inner">
-                                <div class="timeline-icon wow fadeInUp" data-wow-delay="0.2s">
-                                    <span class="number">4</span>
-                                </div>
-                                <div class="timeline-label wow fadeInUp" data-wow-delay="0.2s">
-                                    <p>More</p>
-                                </div>
-                            </div>
-                        </div>
-                    
-                </div>
-                <!-- timeline-centered -->
-            </div>
+        <nav class="clearfix">
+            <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2017/08/30/HashMap实现原理及源码分析/" style="float: left;">
+        ← HashMap实现原理及源码分析
+    </a>
+    
+    
+    <a class="pull-right" href="/2017/08/20/阿里云服务器CentOS-7-3-Firewall防火墙配置/">
+        阿里云服务器CentOS 7.3 Firewall防火墙配置 →
+    </a>
+    
+</nav>
+
+        </nav>
+        <div class="duoshuo" style="padding-top:30px">
+            <div id="cyReward" role="cylabs" data-use="reward" style="text-align:center"></div>
+            <!-- 畅言评论框 start -->
+<div id="SOHUCS" sid="undefined" style="padding: 0px 30px 0px 46px;"></div>
+<!-- 畅言评论框 end -->
+<script type="text/javascript"> 
+(function(){ 
+var appid = 'cyt8ELT4g'; 
+var conf = 'prod_7d9bc5076718eb3f413bf4277ad59436'; 
+var width = window.innerWidth || document.documentElement.clientWidth; 
+if (width < 960) { 
+window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
         </div>
     </div>
+        <script type="text/javascript" charset="utf-8" src="https://changyan.itc.cn/js/lib/jquery.js"></script>
+        <script type="text/javascript" charset="utf-8" src="https://changyan.sohu.com/js/changyan.labs.https.js?appid=cytaHjVBa"></script>
 </section>
+
 
       
 <!-- ============================ Footer =========================== -->

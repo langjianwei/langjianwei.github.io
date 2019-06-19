@@ -62,7 +62,7 @@
 <script src="https://leancloud.cn/scripts/lib/av-0.4.6.min.js"></script>
   <script>AV.initialize("3FAfRbmevTbHahEjKoArMzvP-gzGzoHsz", "revve2KjQfFdtB0rBcmOo3aV");</script>
 <!--
-<body class="post-template">
+<body class="home-template">
 -->
 <body id="index" class="lightnav animsition">
 
@@ -225,89 +225,257 @@
 <!-- // End height spacing helper -->
 
 <!-- ============================ END Hero Image =========================== -->
+<!-- ============================ Content =========================== -->
+
 <section id="intro">
     <div class="container">
-        <div class="row col-md-offset-2">
-            <div class="col-md-8">
-                <h1></h1>
-            </div>
-        </div>
-        <div class="col-md-8 col-md-offset-2">
-            <span style="font-size:14px;"><html>  
-    <head>  
-         <meta http-equiv="Content-Type" content="text/html; charset=" utf-8"="">  
-         <title>公益404</title>                                                                                                                                          
-    </head>  
-    <body>  
-         <script type="text/javascript" src="http://www.qq.com/404/search_children.js" charset="utf-8" homepageurl="http://langjianwei.top/" homepagename="回到我的主页"></script>  
-    </body>  
-</html></span> 
-            <div class="clearfix"></div>
-        </div>
         
-    </div>
-</section>
-<section id="process">
-    <div class="container">
         <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
-                <div class="timeline-centered">
-                    <div class="line"></div>
-                    <div class="present">Past</div>
-                    <div class="dot_tp"></div>
-                    <div class="born">Now</div>
-                    <div class="dot_bt"></div>
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2017/08/20/阿里云服务器CentOS-7-3-Firewall防火墙配置/">阿里云服务器CentOS 7.3 Firewall防火墙配置</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2017-08-20T08:50:37.000Z" itemprop="datePublished">
+          2017-08-20
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        CentOS 7.0防火墙配置参数说明启动停止
+获取firewall状态systemctl status firewalld.servicefirewall-cmd –state开启停止防火墙开机启动：systemctl enable firewalld.service启动：systemctl start firewalld.service停止：systemctl stop firewalld.service禁止开机启动：systemc
+                      
+                    </p>
                     
-                        <div class="timeline-entry">
-                            <div class="timeline-entry-inner">
-                                <div class="timeline-icon wow fadeInUp" data-wow-delay="0.2s">
-                                    <span class="number">1</span>
-                                </div>
-                                <div class="timeline-label wow fadeInUp" data-wow-delay="0.2s">
-                                    <p>2014/06/12-Start</p>
-                                </div>
-                            </div>
-                        </div>
-                    
-                        <div class="timeline-entry">
-                            <div class="timeline-entry-inner">
-                                <div class="timeline-icon wow fadeInUp" data-wow-delay="0.2s">
-                                    <span class="number">2</span>
-                                </div>
-                                <div class="timeline-label wow fadeInUp" data-wow-delay="0.2s">
-                                    <p>2014/11/29-XXX</p>
-                                </div>
-                            </div>
-                        </div>
-                    
-                        <div class="timeline-entry">
-                            <div class="timeline-entry-inner">
-                                <div class="timeline-icon wow fadeInUp" data-wow-delay="0.2s">
-                                    <span class="number">3</span>
-                                </div>
-                                <div class="timeline-label wow fadeInUp" data-wow-delay="0.2s">
-                                    <p>2015/02/18-DDD</p>
-                                </div>
-                            </div>
-                        </div>
-                    
-                        <div class="timeline-entry">
-                            <div class="timeline-entry-inner">
-                                <div class="timeline-icon wow fadeInUp" data-wow-delay="0.2s">
-                                    <span class="number">4</span>
-                                </div>
-                                <div class="timeline-label wow fadeInUp" data-wow-delay="0.2s">
-                                    <p>More</p>
-                                </div>
-                            </div>
-                        </div>
+                    <p class="pull-right readMore">
+                        <a href="/2017/08/20/阿里云服务器CentOS-7-3-Firewall防火墙配置/">阅读更多...</a>
+                    </p>
                     
                 </div>
-                <!-- timeline-centered -->
+                <div class="clearfix"></div>
+                <hr class="nogutter">
             </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2017/08/18/java调用webService接口的几种常用方法/">java调用webService接口的几种常用方法</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2017-08-18T09:41:55.000Z" itemprop="datePublished">
+          2017-08-18
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        * 需求分析：由于系统改进，需要和其他公司多系统进行联调开发，系统之间的数据交互通过调用彼此的webService接口，webService主要解决了不同的系统或者调用分布部署的数据处理问题
+现在总结一下，在开发过程中常用的三种调用接口方式，废话少说，直接撸代码，简单粗暴，哈哈：1 .采用http协议发送请求
+
+使用过webservice的童鞋大概都明白它是基于Soap协议交换数据的，同时Soap协议是对HTTP协议的扩展，其实我们就可
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2017/08/18/java调用webService接口的几种常用方法/">阅读更多...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2017/08/09/Mybatis连接Oracle数据库进行批量插入，更新/">Mybatis连接Oracle数据库进行批量插入，更新</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2017-08-09T15:17:42.000Z" itemprop="datePublished">
+          2017-08-09
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        
+在工作过程中，由于项目的特殊性（OMS系统），需要进行大量的保存，更新操作。根据公司业务需求，现在对项目进行从SqlServer到Oracle数据库的迁移。虽然只是换了数据库，但是原来的业务逻辑是不能改变的，因此参考老系统代码熟悉业务逻辑。
+但是，在参考老项目的时候发现了一个很严重的问题。一段保存订单信息的代码中，老系统的前辈用了mybatis配置生成的mapper文件来进行增删改查，但问题也就出在这里。一条订单信息里面包含了表头，表
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2017/08/09/Mybatis连接Oracle数据库进行批量插入，更新/">阅读更多...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2017/08/06/Ext-Js之获取grid中所有数据/">Ext Js之获取grid中所有数据</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2017-08-06T09:23:11.000Z" itemprop="datePublished">
+          2017-08-06
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        
+ext是一个强大的js类库，也是一种基于MVC开发模式的前端框架，这种开发模式和java的MVC模式有着异曲同工之妙，我觉得还是很方便的。
+为了提高用户体验，优化程序性能，在执行保存操作之前在前台校验表身数据是否为空（即判断grid中数据记录是否大于0，如下图红色框住的部分：）如果为空，不允许进行下一步操作。
+
+
+页面主要布局除了左边，上面是一个from，下面是几个grid，现在我们要取到的就是订单录入这个grid，因为这里面存的表身
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2017/08/06/Ext-Js之获取grid中所有数据/">阅读更多...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2017/07/25/解决Mybatis整合SpringMVC操作Oracle数据库insert-into-语句报ID不能为null/">解决Mybatis整合SpringMVC操作Oracle数据库insert into 语句报ID不能为NULL</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2017-07-25T02:00:08.000Z" itemprop="datePublished">
+          2017-07-25
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        
+由于工作中业务需要，现在需要把系统后台数据库从SqlServer换成oracle,系统中配置mybatis的generator这款插件来自动生成Model，Dao，Mapping相关文件，来做基本的增删改查。
+在进行insert into插入语句的时候，报ORA–01400:无法将null值插入(表名.”ID”)，不应该出现这种情况啊，ID字段是自增长的，当表里插入数据的时候，ID会自动生成的，在Sql Server里面可以，为什么来
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2017/07/25/解决Mybatis整合SpringMVC操作Oracle数据库insert-into-语句报ID不能为null/">阅读更多...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2017/07/23/Oracle中dual表的妙用/">Oracle中dual表的妙用</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2017-07-23T15:03:35.000Z" itemprop="datePublished">
+          2017-07-23
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        
+我相信使用过oracle数据库的猿类们，都知道dual这张表的存在，哈哈。有人说它是神秘的，特殊的，或者说是虚拟的，但它却又是真是存在于数据库中的，今天我们一起来探讨一下他的妙用，因为他在我们的工作中真的帮了我们很大的忙。
+dual这张特殊的表，说他特殊是因为在oracle中，只保证dual里面永远只有一条记录。该表只有一行一列，但是他和系统中的其他表一样，一样可以执行插入、更新、删除操作，还可以执行drop操作，用他来构成selec
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2017/07/23/Oracle中dual表的妙用/">阅读更多...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2017/07/20/你好，郎建伟/">你好，郎建伟</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2017-07-20T04:58:54.000Z" itemprop="datePublished">
+          2017-07-20
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        
+hi,很高兴和大家见面了！筹划已久的博客终于上线。
+今天对于我来说，她是激动人心而又意义非凡的。
+由于许多事情都是第一次去做，所以处处碰壁，酸甜苦辣真的只有自己体会，直到昨晚凌晨三点自己还在搭建博客。如果不是担心今天还要上班，昨晚真的会通宵完成的。
+在未来的时光里，她将会一直陪伴着我，直到世界终结……
+
+关于作者在兴趣的驱动下,写一个免费的东西，有欣喜，也还有汗水，希望您能喜欢我的作品，尊重原创，共同进步
+
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2017/07/20/你好，郎建伟/">阅读更多...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <nav class="pagination" role="pagination">
+          <a class="pull-left" href="/">← 上一页</a>
+          
+        </nav>
+    </div>
+</section>
+<section id="statement">
+    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
+        <div class="row">
+            <p>你不将就一切都时候，生活自然会厚爱于你。</p>
         </div>
     </div>
 </section>
+<!-- ============================ END Content =========================== -->
 
       
 <!-- ============================ Footer =========================== -->

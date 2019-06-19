@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By 
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>Spring-Boot快速入门之连接Mysql集成redis做缓存（二） | 心若向善，处处都是阳光</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="心若向善，处处都是阳光">
+    <meta name="author" content="郎建伟">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="心若向善，处处都是阳光" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+    
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+  
+  
+  
+
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+
+<script src="https://leancloud.cn/scripts/lib/av-0.4.6.min.js"></script>
+  <script>AV.initialize("3FAfRbmevTbHahEjKoArMzvP-gzGzoHsz", "revve2KjQfFdtB0rBcmOo3aV");</script>
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">主页</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">归档</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">生活随笔<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="/" target="_BLANK" class="animsition-link">写写画画</a></li>
+                    
+                        <li><a href="/atom.xml" target="_BLANK" class="animsition-link">打打闹闹</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+        	<li>
+        		<a class="sb-toggle-submenu">分类<span class="sb-caret"></span></a>
+            	<ul class="sb-submenu">
+				  	
+				    <li><a href="/categories/ExtJs/" class="animsition-link">ExtJs<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/Linux/" class="animsition-link">Linux<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/Spring/" class="animsition-link">Spring<small>(2)</small></a></li>
+				    
+				    <li><a href="/categories/Spring-Boot/" class="animsition-link">Spring Boot<small>(2)</small></a></li>
+				    
+				    <li><a href="/categories/java/" class="animsition-link">java<small>(2)</small></a></li>
+				    
+				    <li><a href="/categories/json/" class="animsition-link">json<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/mybatis/" class="animsition-link">mybatis<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/oracle/" class="animsition-link">oracle<small>(2)</small></a></li>
+				    
+				    <li><a href="/categories/webService/" class="animsition-link">webService<small>(1)</small></a></li>
+				    
+				</ul>
+        	</li>
+			
+            
+            <li>
+                <a class="sb-toggle-submenu">友情链接<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://www.importnew.com/" class="animsition-link">importnew</a></li>
+                    
+                    <li><a href="http://www.oschina.net/" class="animsition-link">开源中国</a></li>
+                    
+                    <li><a href="http://www.oschina.net/" class="animsition-link">redis中文官网</a></li>
+                    
+                    <li><a href="https://springcloud.cc/" class="animsition-link">Spring Cloud中文网</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">关于我</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                        
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">心若向善，处处都是阳光</a></li>
+                            <li class="nolink"><span></span>Dances with Wolves.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span></span>Welcome!</li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+
+                <h1>Spring-Boot快速入门之连接Mysql集成redis做缓存（二）</h1>
+                发表于<span class="post-meta">
+      <time datetime="2017-11-28T03:03:36.000Z" itemprop="datePublished">
+          2017-11-28
+      </time>
+    
+</span>
+                <span id="busuanzi_container_page_pv">&nbsp&nbsp&nbsp&nbsp阅读次数：
+                    <span id="busuanzi_value_page_pv"></span>次
+                </span>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<h4 id="一、缓存的应用场景"><a href="#一、缓存的应用场景" class="headerlink" title="一、缓存的应用场景"></a>一、缓存的应用场景</h4><h5 id="什么是缓存？"><a href="#什么是缓存？" class="headerlink" title="什么是缓存？"></a>什么是缓存？</h5><p>在互联网场景下，尤其 高并发大流量场景下，需要将一些经常展现和不会频繁变更的数据，存放在存取速率更快的地方。缓存就是一个存储器，在技术选型中，常用 Redis 作为缓存数据库。一是缓存主要是在获取资源方便性能优化的关键方面，二是减少海量的频繁的数据库IO操作。</p>
+<p>Redis 是一个高性能的 key-value 数据库。GitHub 地址：<a href="https://github.com/antirez/redis" target="_blank" rel="noopener">https://github.com/antirez/redis</a> 。百度百科 是这么描述的：<br>redis是一个key-value存储系统。和Memcached类似，它支持存储的value类型相对更多，包括string(字符串)、list(链表)、set(集合)、zset(sorted set –有序集合)和hash（哈希类型）。这些数据类型都支持push/pop、add/remove及取交集并集和差集及更丰富的操作，而且这些操作都是原子性的。在此基础上，redis支持各种不同方式的排序。与memcached一样，为了保证效率，数据都是缓存在内存中。区别的是redis会周期性的把更新的数据写入磁盘或者把修改操作写入追加的记录文件，并且在此基础上实现了master-slave(主从)同步。</p>
+<h5 id="缓存的应用场景有哪些呢？"><a href="#缓存的应用场景有哪些呢？" class="headerlink" title="缓存的应用场景有哪些呢？"></a>缓存的应用场景有哪些呢？</h5><p>比如常见的电商场景，根据商品 ID 获取商品信息时，店铺信息和商品详情信息就可以缓存在 Redis，直接从 Redis 获取。减少了去数据库查询的次数。但会出现新的问题，就是如何对缓存进行更新？这就是下面要讲的。</p>
+<h4 id="二、更新缓存的策略"><a href="#二、更新缓存的策略" class="headerlink" title="二、更新缓存的策略"></a>二、更新缓存的策略</h4><p>参考《缓存更新的套路》<a href="http://coolshell.cn/articles/17416.html" target="_blank" rel="noopener">http://coolshell.cn/articles/17416.html</a> ，缓存更新的模式有四种：Cache aside, Read through, Write through, Write behind caching。</p>
+<p>这里我们使用的是 Cache Aside 策略，从三个维度：（摘自 耗子叔叔博客）<br>失效：应用程序先从cache取数据，没有得到，则从数据库中取数据，成功后，放到缓存中。<br>命中：应用程序从cache中取数据，取到后返回。<br>更新：先把数据存到数据库中，成功后，再让缓存失效。</p>
+<p>大致流程如下：<br>获取商品详情举例<br>a. 从商品 Cache 中获取商品详情，如果存在，则返回获取 Cache 数据返回。<br>b. 如果不存在，则从商品 DB 中获取。获取成功后，将数据存到 Cache 中。则下次获取商品详情，就可以从 Cache 就可以得到商品详情数据。<br>c. 从商品 DB 中更新或者删除商品详情成功后，则从缓存中删除对应商品的详情缓存<br><img src="https://langjianwei.github.io/images/springbootRedis01.png" alt="“图01”"></p>
+<h4 id="三、springboot-mybatis-redis代码工程案例讲解"><a href="#三、springboot-mybatis-redis代码工程案例讲解" class="headerlink" title="三、springboot_mybatis_redis代码工程案例讲解"></a>三、springboot_mybatis_redis代码工程案例讲解</h4><p>git clone 下载工程 springboot_mybatis_redis ，项目地址见 GitHub –<a href="https://github.com/langjianwei/SpringBoot" target="_blank" rel="noopener">https://github.com/langjianwei/SpringBoot</a></p>
+<h5 id="1-数据库建表和-Redis-准备（安装过程省略……）"><a href="#1-数据库建表和-Redis-准备（安装过程省略……）" class="headerlink" title="1.数据库建表和 Redis 准备（安装过程省略……）"></a>1.数据库建表和 Redis 准备（安装过程省略……）</h5><h6 id="a-创建数据库-springbootdb："><a href="#a-创建数据库-springbootdb：" class="headerlink" title="a.创建数据库 springbootdb："></a>a.创建数据库 springbootdb：</h6><pre><code>CREATE DATABASE springbootdb;
+</code></pre><h6 id="b-创建表-studentinfo-："><a href="#b-创建表-studentinfo-：" class="headerlink" title="b.创建表 studentinfo ："></a>b.创建表 studentinfo ：</h6><pre><code>DROP TABLE IF EXISTS `studentinfo`;
+CREATE TABLE `studentinfo` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT &apos;主键id&apos;,
+  `name` varchar(25) DEFAULT NULL COMMENT &apos;姓名&apos;,
+  `age` varchar(25) DEFAULT NULL COMMENT &apos;年龄&apos;,
+  `classes` varchar(25) DEFAULT NULL COMMENT &apos;班级&apos;,
+  `rem` varchar(250) DEFAULT NULL COMMENT &apos;备注&apos;,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+</code></pre><h6 id="c-插入数据"><a href="#c-插入数据" class="headerlink" title="c.插入数据"></a>c.插入数据</h6><pre><code>INSERT INTO `studentinfo` VALUES (&apos;1&apos;, &apos;郎建伟&apos;, &apos;23&apos;, &apos;应用1402&apos;, &apos;一代传奇&apos;);
+</code></pre><h5 id="2-代码工程案例项目结构介绍"><a href="#2-代码工程案例项目结构介绍" class="headerlink" title="2. 代码工程案例项目结构介绍"></a>2. 代码工程案例项目结构介绍</h5><h6 id="代码工程案例项目结构如下图所示："><a href="#代码工程案例项目结构如下图所示：" class="headerlink" title="代码工程案例项目结构如下图所示："></a>代码工程案例项目结构如下图所示：</h6><pre><code>com.ljw.springboot_mybatis_redis.controller -控制 层Controller
+com.ljw.springboot_mybatis_redis.dao - 数据操作层 DAO
+com.ljw.springboot_mybatis_redis.model - 实体类（我是基于mybatis插件自动生成的）
+com.ljw.springboot_mybatis_redis.service - 业务逻辑层
+SpringbootMybatisRedisApplication - 应用启动类
+application.yml - 应用配置文件，应用启动会自动读取配置（springboot官方推荐使用）
+</code></pre><h5 id="3-改数据库配置"><a href="#3-改数据库配置" class="headerlink" title="3.改数据库配置"></a>3.改数据库配置</h5><p>打开 application.yml 文件， 修改相应的MySQL数据源配置，redis，mybatis配置文件，比如数据源地址、账号、密码等。<br>（如果不是用 MySQL，自行添加连接驱动到 pom.xml，然后修改驱动名配置。）</p>
+<h5 id="4-编译工程"><a href="#4-编译工程" class="headerlink" title="4.编译工程"></a>4.编译工程</h5><p>在项目根目录 springboot_mybatis_redis，运行 maven 指令：</p>
+<pre><code>mvn clean install
+</code></pre><h5 id="5-运行工程"><a href="#5-运行工程" class="headerlink" title="5.运行工程"></a>5.运行工程</h5><p>右键运行 springboot_mybatis_redis 工程 SpringbootMybatisRedisApplication 应用启动类的 main 函数。<br>项目运行成功后，打开浏览器或者 postman 工具可以如下操作<br>根据 ID，获取学生信息<br><a href="http://localhost:8088/studentInfo/1" target="_blank" rel="noopener">http://localhost:8088/studentInfo/1</a><br>再请求一次，获取学生信息会发现数据获取的耗时快了很多。服务端 Console 输出的日志：<br><img src="https://langjianwei.github.io/images/springbootRedis03.jpg" alt="“图01”"><br>浏览器显示为：<br><img src="https://langjianwei.github.io/images/springbootRedis02.jpg" alt="“图01”"><br>可见，第一次是从数据库 DB 获取数据，并插入缓存，第二次直接从缓存中取。</p>
+<h4 id="四、springboot-mybatis-redis-工程代码配置详解"><a href="#四、springboot-mybatis-redis-工程代码配置详解" class="headerlink" title="四、springboot-mybatis-redis 工程代码配置详解"></a>四、springboot-mybatis-redis 工程代码配置详解</h4><h5 id="1-pom-xml-依赖配置"><a href="#1-pom-xml-依赖配置" class="headerlink" title="1.pom.xml 依赖配置:"></a>1.pom.xml 依赖配置:</h5><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+
+    &lt;groupId&gt;com.ljw&lt;/groupId&gt;
+    &lt;artifactId&gt;springboot_mybatis_redis&lt;/artifactId&gt;
+    &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+    &lt;packaging&gt;war&lt;/packaging&gt;
+
+    &lt;name&gt;springboot_mybatis_redis&lt;/name&gt;
+    &lt;description&gt;Demo project for Spring Boot&lt;/description&gt;
+
+    &lt;!-- Spring Boot 启动父依赖 --&gt;
+    &lt;parent&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
+        &lt;version&gt;1.5.1.RELEASE&lt;/version&gt;
+    &lt;/parent&gt;
+
+    &lt;properties&gt;
+        &lt;mybatis-spring-boot&gt;1.2.0&lt;/mybatis-spring-boot&gt;
+        &lt;mysql-connector&gt;5.1.39&lt;/mysql-connector&gt;
+        &lt;spring-boot-starter-redis-version&gt;1.3.2.RELEASE&lt;/spring-boot-starter-redis-version&gt;
+    &lt;/properties&gt;
+
+    &lt;dependencies&gt;
+
+        &lt;!-- Spring Boot Redis 依赖 --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-redis&lt;/artifactId&gt;
+            &lt;version&gt;${spring-boot-starter-redis-version}&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;!-- Spring Boot Web 依赖 --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+
+        &lt;!-- Spring Boot Test 依赖 --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+
+        &lt;!-- Spring Boot Mybatis 依赖 --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.mybatis.spring.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;mybatis-spring-boot-starter&lt;/artifactId&gt;
+            &lt;version&gt;${mybatis-spring-boot}&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;!-- MySQL 连接驱动依赖 --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;mysql&lt;/groupId&gt;
+            &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+            &lt;version&gt;${mysql-connector}&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;!-- Junit --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;junit&lt;/groupId&gt;
+            &lt;artifactId&gt;junit&lt;/artifactId&gt;
+            &lt;version&gt;4.12&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;!-- 开启热部署 --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-devtools&lt;/artifactId&gt;
+            &lt;optional&gt;true&lt;/optional&gt;
+        &lt;/dependency&gt;
+
+        &lt;!-- 支持 @ConfigurationProperties 注解 --&gt;  
+        &lt;dependency&gt;  
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;  
+            &lt;artifactId&gt;spring-boot-configuration-processor&lt;/artifactId&gt;  
+            &lt;optional&gt;true&lt;/optional&gt;  
+        &lt;/dependency&gt;
+
+        &lt;!-- 添加 thymeleaf模板引擎来替换传统的jsp--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-thymeleaf&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+
+        &lt;!-- 添加 nekohtml依赖--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;net.sourceforge.nekohtml&lt;/groupId&gt;
+            &lt;artifactId&gt;nekohtml&lt;/artifactId&gt;
+            &lt;version&gt;1.9.22&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;!--shiro权限认证--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.apache.shiro&lt;/groupId&gt;
+            &lt;artifactId&gt;shiro-spring&lt;/artifactId&gt;
+            &lt;version&gt;1.4.0&lt;/version&gt;
+        &lt;/dependency&gt;
+
+    &lt;/dependencies&gt;
+
+   &lt;build&gt;
+       &lt;plugins&gt;
+           &lt;plugin&gt;  
+           &lt;groupId&gt;org.mybatis.generator&lt;/groupId&gt;  
+           &lt;artifactId&gt;mybatis-generator-maven-plugin&lt;/artifactId&gt;  
+           &lt;version&gt;1.3.5&lt;/version&gt;  
+           &lt;dependencies&gt;  
+               &lt;dependency&gt;  
+                   &lt;groupId&gt; mysql&lt;/groupId&gt;  
+                   &lt;artifactId&gt; mysql-connector-java&lt;/artifactId&gt;  
+                   &lt;version&gt; 5.1.39&lt;/version&gt;  
+               &lt;/dependency&gt;  
+               &lt;dependency&gt;  
+                   &lt;groupId&gt;org.mybatis.generator&lt;/groupId&gt;  
+                   &lt;artifactId&gt;mybatis-generator-core&lt;/artifactId&gt;  
+                   &lt;version&gt;1.3.5&lt;/version&gt;  
+               &lt;/dependency&gt;  
+           &lt;/dependencies&gt;  
+           &lt;executions&gt;  
+               &lt;execution&gt;  
+                   &lt;id&gt;Generate MyBatis Artifacts&lt;/id&gt;  
+                   &lt;phase&gt;package&lt;/phase&gt;  
+                   &lt;goals&gt;  
+                       &lt;goal&gt;generate&lt;/goal&gt;  
+                   &lt;/goals&gt;  
+               &lt;/execution&gt;  
+           &lt;/executions&gt;  
+           &lt;configuration&gt;  
+               &lt;!--允许移动生成的文件 --&gt;  
+               &lt;verbose&gt;true&lt;/verbose&gt;  
+               &lt;!-- 是否覆盖 --&gt;  
+               &lt;overwrite&gt;true&lt;/overwrite&gt;  
+               &lt;!-- 自动生成的配置 --&gt;  
+               &lt;configurationFile&gt;  
+                   src/main/resources/mybatis-generator.xml&lt;/configurationFile&gt;  
+           &lt;/configuration&gt;  
+           &lt;/plugin&gt;  
+       &lt;/plugins&gt;
+    &lt;/build&gt;
+&lt;/project&gt;
+</code></pre><h5 id="2-在-application-yml-应用配置文件，增加-Redis-相关配置"><a href="#2-在-application-yml-应用配置文件，增加-Redis-相关配置" class="headerlink" title="2.在 application.yml 应用配置文件，增加 Redis 相关配置"></a>2.在 application.yml 应用配置文件，增加 Redis 相关配置</h5><pre><code>spring:
+    datasource:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://rm-uf61rp63pil4tfn87o.mysql.rds.aliyuncs.com:3306/springbootdb?useUnicode=true&amp;characterEncoding=utf8
+      username: root
+      password: Langjianwei1015
+
+    #redis配置
+    redis:  
+      database:  0  
+      host:  192.168.245.128  
+      port:  6379  
+      password: 123123  
+      pool:  
+        max-active: 8  
+        max-wait: -1  
+        max-idle: 8  
+        min-idle: 0  
+      timeout: 0
+
+    #Thymeleaf模板引擎配置
+    thymeleaf:
+      cache: false
+      prefix: classpath:/templates/
+      suffix: .html
+      mode: LEGACYHTML5
+      encoding: UTF-8
+      content-type: text/html
+
+mybatis:
+     typeAliasesPackage: org.spring.springboot.domain
+     mapperLocations: classpath:mapper/*.xml
+
+server:
+      port: 8088
+</code></pre><h5 id="3-主要学生信息业务逻辑实现类-StudentInfoServiceImpl-java：（详细代码请查看上面地址克隆项目查看）"><a href="#3-主要学生信息业务逻辑实现类-StudentInfoServiceImpl-java：（详细代码请查看上面地址克隆项目查看）" class="headerlink" title="3.主要学生信息业务逻辑实现类 StudentInfoServiceImpl.java：（详细代码请查看上面地址克隆项目查看）"></a>3.主要学生信息业务逻辑实现类 StudentInfoServiceImpl.java：（详细代码请查看上面地址克隆项目查看）</h5><pre><code>package com.ljw.springboot_mybatis_redis.service.impl;
+import java.util.concurrent.TimeUnit;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.stereotype.Service;
+import com.ljw.springboot_mybatis_redis.dao.StudentInfoMapper;
+import com.ljw.springboot_mybatis_redis.model.StudentInfo;
+import com.ljw.springboot_mybatis_redis.service.StudentInfoService;
+ /**
+ * @author 郎建伟
+ *学生信息业务逻辑实现类 
+ */
+@Service
+public class StudentInfoServiceImpl implements StudentInfoService{
+
+    private static final Logger LOGGER=LoggerFactory.getLogger(StudentInfoServiceImpl.class);
+
+    @Autowired
+    private StudentInfoMapper studentInfoMapper;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
+    @Override
+    public StudentInfo findStudentInfoById(Integer id) {
+         // 从缓存中获取学生信息
+        String key = &quot;StudentInfo_&quot; + id;
+        ValueOperations&lt;String, StudentInfo&gt; operations = redisTemplate.opsForValue();
+
+        // 缓存存在
+        boolean hasKey = redisTemplate.hasKey(key);
+        if (hasKey) {
+            StudentInfo studentInfo = operations.get(key);
+
+            LOGGER.info(&quot;根据id查找学生信息 : 从缓存中获取了学生信息 &gt;&gt; &quot; + studentInfo.toString());
+            return studentInfo;
+        }
+
+        // 从 数据库 中获取学生信息
+        StudentInfo studentInfo = studentInfoMapper.selectByPrimaryKey(id);
+
+        // 插入缓存
+        operations.set(key, studentInfo, 10, TimeUnit.SECONDS);
+        LOGGER.info(&quot;根据id查找学生信息 : 学生信息插入缓存 &gt;&gt; &quot; + studentInfo.toString());
+
+        return studentInfo;
+
+    }
+
+    @Override
+    public Integer saveStudentInfo(StudentInfo studentInfo) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Integer updaateStudentInfo(StudentInfo studentInfo) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+}
+</code></pre><p>首先这里注入了 RedisTemplate 对象。联想到 Spring 的 JdbcTemplate ，RedisTemplate 封装了 RedisConnection，具有连接管理，序列化和 Redis 操作等功能。还有针对 String 的支持对象 StringRedisTemplate。<br>Redis 操作视图接口类用的是 ValueOperations，对应的是 Redis String/Value 操作。还有其他的操作视图，ListOperations、SetOperations、ZSetOperations 和 HashOperations 。ValueOperations 插入缓存是可以设置失效时间，这里设置的失效时间是 10 s。</p>
+<h4 id="五、小结"><a href="#五、小结" class="headerlink" title="五、小结"></a>五、小结</h4><p>本文涉及到 Spring Boot 在使用 Redis 缓存时，一个是缓存对象需要序列化，二个是缓存更新策略是如何的。（部分专业术语参考自<a href="https://www.bysocket.com/）" target="_blank" rel="noopener">https://www.bysocket.com/）</a></p>
+<p><code>关于作者</code><br>在兴趣的驱动下,写一个<code>免费</code>的东西，有欣喜，也还有汗水，希望您能喜欢我的作品，尊重原创，共同进步</p>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="clearfix">
+            <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2018/08/17/hello-world/" style="float: left;">
+        ← Hello World
+    </a>
+    
+    
+    <a class="pull-right" href="/2017/11/22/java多线程之内存可见性/">
+         →
+    </a>
+    
+</nav>
+
+        </nav>
+        <div class="duoshuo" style="padding-top:30px">
+            <div id="cyReward" role="cylabs" data-use="reward" style="text-align:center"></div>
+            <!-- 畅言评论框 start -->
+<div id="SOHUCS" sid="undefined" style="padding: 0px 30px 0px 46px;"></div>
+<!-- 畅言评论框 end -->
+<script type="text/javascript"> 
+(function(){ 
+var appid = 'cyt8ELT4g'; 
+var conf = 'prod_7d9bc5076718eb3f413bf4277ad59436'; 
+var width = window.innerWidth || document.documentElement.clientWidth; 
+if (width < 960) { 
+window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
+        </div>
+    </div>
+        <script type="text/javascript" charset="utf-8" src="https://changyan.itc.cn/js/lib/jquery.js"></script>
+        <script type="text/javascript" charset="utf-8" src="https://changyan.sohu.com/js/changyan.labs.https.js?appid=cytaHjVBa"></script>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+                <p>
+                    &copy; 2017<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By 郎建伟. All Rights Reserved.
+                </p>
+                <p>Theme By <a href="https://langjianwei.top/" style="color: #767D84">Langjianwei</a></p>
+
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+                <span id="busuanzi_container_site_pv">您是第：
+                    <span id="busuanzi_value_site_pv"></span>位访问本站的小伙伴
+                </span>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+</footer>
+
+<!-- ============================ END Footer =========================== -->
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+      <!-- Load our scripts -->
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+
+    resizeHero();
+
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$('#intro').find('img').each(function(){
+  var alt = this.alt;
+
+  if (alt){
+    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
+  }
+
+  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
+});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      (function(){
+        console.log('font');
+        var getCss = function(path) {
+          var head = document.getElementsByTagName('head')[0];
+          link = document.createElement('link');
+          link.href = path;
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          head.appendChild(link);
+        };
+        getCss('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+        getCss('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
+      })();
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+
+
+<!--page counter part-->
+<script>
+function addCount (Counter) {
+        url=$('.article-date').attr('href').trim();
+    title = $('.article-title').text().trim();
+    var query=new AV.Query(Counter);
+    //use url as unique idnetfication
+    query.equalTo("url",url);
+    query.find({
+        success: function(results){
+            if(results.length>0)
+            {
+                var counter=results[0];
+                counter.fetchWhenSave(true); //get recent result
+                counter.increment("time");
+                counter.save();
+            }
+            else
+            {
+                var newcounter=new Counter();
+                newcounter.set("title",title);
+                newcounter.set("url",url);
+                newcounter.set("time",1);
+                newcounter.save(null,{
+                    success: function(newcounter){
+                    //alert('New object created');
+                    },
+                    error: function(newcounter,error){
+                    alert('Failed to create');
+                    }
+                    });
+            }
+        },
+        error: function(error){
+            //find null is not a error
+            alert('Error:'+error.code+" "+error.message);
+        }
+    });
+}
+$(function(){
+    var Counter=AV.Object.extend("Counter");
+    //only increse visit counting when intering a page
+    if ($('.article-title').length == 1)
+       addCount(Counter);
+    var query=new AV.Query(Counter);
+    query.descending("time");
+    // the sum of popular posts
+    query.limit(10); 
+    query.find({
+        success: function(results){
+                for(var i=0;i<results.length;i++)    
+                {
+                    var counter=results[i];
+                    title=counter.get("title");
+                    url=counter.get("url");
+                    time=counter.get("time");
+                    // add to the popularlist widget
+                    showcontent=title+" ("+time+")";
+                    //notice the "" in href
+                    $('.popularlist').append('<li><a href="'+url+'">'+showcontent+'</a></li>');
+                }
+            },
+        error: function(error){
+            alert("Error:"+error.code+" "+error.message);
+        }
+        }
+    )
+    });
+
+</body>
+</html>

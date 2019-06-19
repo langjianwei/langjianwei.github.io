@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>心若向善，处处都是阳光</title>
+  <title>Spring Boot快速入门之Hello Word（一） | 心若向善，处处都是阳光</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -198,116 +198,119 @@
         <!-- ============================ Header & Logo bar =========================== -->
 
 
-      <!-- ============================ Hero Image =========================== -->
-
-<section id="hero" class="scrollme">
-    <div class="container-fluid element-img" style="background: url(/img/lang.jpg) no-repeat center center fixed;background-size: cover">
-        <div class="row">
-            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
-                <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
-                    <div>
-                        
-                        <h2><span>每一个不曾起舞的日子都是对生命的辜负，我终将变得更好</span></h2>
-                        <p></p>
-                        
-
-                    </div>
-                </div>
-            </div>
-            <!-- // .col-md-12 -->
-        </div>
-        <div class="herofade beige-dk"></div>
-    </div>
-</section>
-
-<!-- Height spacing helper -->
-<div class="heightblock"></div>
-<!-- // End height spacing helper -->
-
-<!-- ============================ END Hero Image =========================== -->
+      
 <section id="intro">
     <div class="container">
         <div class="row col-md-offset-2">
             <div class="col-md-8">
-                <h1></h1>
+
+                <h1>Spring Boot快速入门之Hello Word（一）</h1>
+                发表于<span class="post-meta">
+      <time datetime="2017-09-15T06:40:56.000Z" itemprop="datePublished">
+          2017-09-15
+      </time>
+    
+</span>
+                <span id="busuanzi_container_page_pv">&nbsp&nbsp&nbsp&nbsp阅读次数：
+                    <span id="busuanzi_value_page_pv"></span>次
+                </span>
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-            <span style="font-size:14px;"><html>  
-    <head>  
-         <meta http-equiv="Content-Type" content="text/html; charset=" utf-8"="">  
-         <title>公益404</title>                                                                                                                                          
-    </head>  
-    <body>  
-         <script type="text/javascript" src="http://www.qq.com/404/search_children.js" charset="utf-8" homepageurl="http://langjianwei.top/" homepagename="回到我的主页"></script>  
-    </body>  
-</html></span> 
+      		<ul>
+<li>Spring Boot是由Pivotal团队提供的全新框架，其设计目的是用来简化新Spring应用的初始搭建以及开发过程。该框架使用了特定的方式来进行配置，从而使开发人员不再需要定义样板化的配置。通过这种方式，Boot致力于在蓬勃发展的快速应用开发领域（rapid application development）成为领导者。</li>
+<li><p>大家在第1次接触或者学习Spring框架的时候，是否因为其繁杂的配置而退却了？反正我是这样，还记得那时候一脸懵逼的样子，在你第n次使用Spring框架的时候，是否觉得一堆反复黏贴的配置有一些厌烦？今天，教给大家一种全新的方式来使用Spring Boot，他让你更易上手，更简单快捷地构建Spring应用！</p>
+</li>
+<li><p>Spring Boot的主要优点：</p>
+<ul>
+<li>为所有Spring开发者更快的入门</li>
+<li>开箱即用，提供各种默认配置来简化项目配置</li>
+<li>内嵌式容器简化Web项目</li>
+<li>没有冗余代码生成和XML配置的要求</li>
+</ul>
+</li>
+<li><p>今天两种方法教给大家构建Spring Boot应用 ：<br>一 、访问Spring官网构建项目：<br>1 .<a href="https://start.spring.io" target="_blank" rel="noopener">https://start.spring.io</a><br>2 .如图所示：选择构建工具Maven Project、Spring Boot版本1.5.7以及一些工程基本信息，切记务必引入web模块</p>
+<ul>
+<li><img src="https://langjianwei.github.io/images/springboot01.png" alt="“图01”"></li>
+</ul>
+<p>3 .点击Generate Project下载项目压缩包<br>4 .把下载的压缩包解压到eclipse的工作空间目录，右键导入已存在的maven项目，如图：</p>
+<ul>
+<li><img src="https://langjianwei.github.io/images/springboot02.png" alt="“图02”"></li>
+</ul>
+<p>5 .导入的项目结构如下：</p>
+<ul>
+<li><img src="https://langjianwei.github.io/images/springboot03.png" alt="“图03”"><ul>
+<li>src/main/java下的程序文件：我们的代码都在这个目录下面写</li>
+<li>src/main/resources下的资源文件文件：存放我们的配置文件，静态，js，css样式文件等</li>
+<li>src/test/下的测试文件：我们的单元测试代码</li>
+<li>pom.xml文件：maven用于管理我们的项目jar包，上面第二部引入的web模块jar包，连接数据库的mysql等都在这里面引用</li>
+</ul>
+</li>
+</ul>
+<p>6 .编写代码：</p>
+<ul>
+<li>在src/main/java下面新建一个controller包和一个类，如图：<br><img src="https://langjianwei.github.io/images/springboot04.png" alt="“图04”"></li>
+<li>以前熟悉Spring MVC的同学都知道接下来改怎么做，Spring Boot简单的一行代码，两个注解完美解决：<pre><code>@RestController
+public class HelloController {
+    @RequestMapping(&quot;/hello&quot;)
+    public String hello(){
+         return &quot;hello，郎建伟&quot;;
+    }
+}
+</code></pre></li>
+<li>@RestController注解用于返回一个json格式的字符串，相当于Spring MVC的@Controller和@ResponseBody两个注解加起来的作用</li>
+<li>@RequestMapping注解用于映射我们的请求访问路径</li>
+</ul>
+<p>7 .浏览器访问测试，如图所示成功返回数据：Spring Boot有自带的Tomcat服务器，端口默认8080，我这里由于和工作项目冲突改成8088，大家了解便可</p>
+<ul>
+<li><img src="https://langjianwei.github.io/images/springboot05.png" alt="“图05”"></li>
+</ul>
+<p>二 、使用intellij IDEA开发工具构建项目，放一张图，步骤和使用eclipse大同小异（推荐大家以后开发都使用intellij IDEA，哈哈）：</p>
+<ul>
+<li><img src="https://langjianwei.github.io/images/springboot06.png" alt="“图06”"></li>
+</ul>
+</li>
+<li><p>和以前Spring MVC大量的xml配置相比，现在搭建一个web项目是不是爽翻天了，哈哈，技术的进步永不停止，祝大家学习愉快！</p>
+</li>
+</ul>
+<p><code>关于作者</code><br>在兴趣的驱动下,写一个<code>免费</code>的东西，有欣喜，也还有汗水，希望您能喜欢我的作品，尊重原创，共同进步</p>
+
             <div class="clearfix"></div>
+            <hr class="nogutter">
         </div>
-        
-    </div>
-</section>
-<section id="process">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
-                <div class="timeline-centered">
-                    <div class="line"></div>
-                    <div class="present">Past</div>
-                    <div class="dot_tp"></div>
-                    <div class="born">Now</div>
-                    <div class="dot_bt"></div>
-                    
-                        <div class="timeline-entry">
-                            <div class="timeline-entry-inner">
-                                <div class="timeline-icon wow fadeInUp" data-wow-delay="0.2s">
-                                    <span class="number">1</span>
-                                </div>
-                                <div class="timeline-label wow fadeInUp" data-wow-delay="0.2s">
-                                    <p>2014/06/12-Start</p>
-                                </div>
-                            </div>
-                        </div>
-                    
-                        <div class="timeline-entry">
-                            <div class="timeline-entry-inner">
-                                <div class="timeline-icon wow fadeInUp" data-wow-delay="0.2s">
-                                    <span class="number">2</span>
-                                </div>
-                                <div class="timeline-label wow fadeInUp" data-wow-delay="0.2s">
-                                    <p>2014/11/29-XXX</p>
-                                </div>
-                            </div>
-                        </div>
-                    
-                        <div class="timeline-entry">
-                            <div class="timeline-entry-inner">
-                                <div class="timeline-icon wow fadeInUp" data-wow-delay="0.2s">
-                                    <span class="number">3</span>
-                                </div>
-                                <div class="timeline-label wow fadeInUp" data-wow-delay="0.2s">
-                                    <p>2015/02/18-DDD</p>
-                                </div>
-                            </div>
-                        </div>
-                    
-                        <div class="timeline-entry">
-                            <div class="timeline-entry-inner">
-                                <div class="timeline-icon wow fadeInUp" data-wow-delay="0.2s">
-                                    <span class="number">4</span>
-                                </div>
-                                <div class="timeline-label wow fadeInUp" data-wow-delay="0.2s">
-                                    <p>More</p>
-                                </div>
-                            </div>
-                        </div>
-                    
-                </div>
-                <!-- timeline-centered -->
-            </div>
+        <nav class="clearfix">
+            <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2017/09/26/java-基础知识总结（重点）/" style="float: left;">
+        ← java 基础知识总结（重点）
+    </a>
+    
+    
+    <a class="pull-right" href="/2017/08/30/Jackson-高性能的JSON处理/">
+        java下Jackson 高性能的JSON处理 →
+    </a>
+    
+</nav>
+
+        </nav>
+        <div class="duoshuo" style="padding-top:30px">
+            <div id="cyReward" role="cylabs" data-use="reward" style="text-align:center"></div>
+            <!-- 畅言评论框 start -->
+<div id="SOHUCS" sid="undefined" style="padding: 0px 30px 0px 46px;"></div>
+<!-- 畅言评论框 end -->
+<script type="text/javascript"> 
+(function(){ 
+var appid = 'cyt8ELT4g'; 
+var conf = 'prod_7d9bc5076718eb3f413bf4277ad59436'; 
+var width = window.innerWidth || document.documentElement.clientWidth; 
+if (width < 960) { 
+window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
         </div>
     </div>
+        <script type="text/javascript" charset="utf-8" src="https://changyan.itc.cn/js/lib/jquery.js"></script>
+        <script type="text/javascript" charset="utf-8" src="https://changyan.sohu.com/js/changyan.labs.https.js?appid=cytaHjVBa"></script>
 </section>
+
 
       
 <!-- ============================ Footer =========================== -->
