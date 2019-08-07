@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>Category: oracle | 心若向善，处处都是阳光</title>
+  <title>java爬虫之大众点评CSS+SVG反爬 | 心若向善，处处都是阳光</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -62,7 +62,7 @@
 <script src="https://leancloud.cn/scripts/lib/av-0.4.6.min.js"></script>
   <script>AV.initialize("3FAfRbmevTbHahEjKoArMzvP-gzGzoHsz", "revve2KjQfFdtB0rBcmOo3aV");</script>
 <!--
-<body class="home-template">
+<body class="post-template">
 -->
 <body id="index" class="lightnav animsition">
 
@@ -200,75 +200,78 @@
         <!-- ============================ Header & Logo bar =========================== -->
 
 
-      <!-- ============================ Hero Image =========================== -->
-
-<section id="hero" class="scrollme">
-    <div class="container-fluid element-img" style="background: url(/img/lang.jpg) no-repeat center center fixed;background-size: cover">
-        <div class="row">
-            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
-                <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
-                    <div>
-                        
-                        <h2><span>每一个不曾起舞的日子都是对生命的辜负，我终将变得更好</span></h2>
-                        <p></p>
-                        
-
-                    </div>
-                </div>
-            </div>
-            <!-- // .col-md-12 -->
-        </div>
-        <div class="herofade beige-dk"></div>
-    </div>
-</section>
-
-<!-- Height spacing helper -->
-<div class="heightblock"></div>
-<!-- // End height spacing helper -->
-
-<!-- ============================ END Hero Image =========================== -->
-
-
-
-
-<section id="services">
+      
+<section id="intro">
     <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="row boxes">
-                    
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2017/07/25/解决Mybatis整合SpringMVC操作Oracle数据库insert-into-语句报ID不能为null/">解决Mybatis整合SpringMVC操作Oracle数据库insert into 语句报ID不能为NULL</a></h4>
-                            
-                            <p><time datetime="2017-07-25T02:00:08.000Z"><a href="/2017/07/25/解决Mybatis整合SpringMVC操作Oracle数据库insert-into-语句报ID不能为null/">2017-07-25</a></time></p>
-                        </div>
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2017/07/23/Oracle中dual表的妙用/">Oracle中dual表的妙用</a></h4>
-                            
-                            <p><time datetime="2017-07-23T15:03:35.000Z"><a href="/2017/07/23/Oracle中dual表的妙用/">2017-07-23</a></time></p>
-                        </div>
-                    
-                </div>
-            </div>    
-        </div>
-    </div>
-</section> 
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
 
-<section id="statement">
-    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
-        <div class="row">
-            <p>你不将就一切都时候，生活自然会厚爱于你。</p>
+                <h1>java爬虫之大众点评CSS+SVG反爬</h1>
+                发表于<span class="post-meta">
+      <time datetime="2019-06-28T08:28:40.000Z" itemprop="datePublished">
+          2019-06-28
+      </time>
+    
+    
+    | 
+    <a href='/tags/java-爬虫-反爬-大众点评/'>java,爬虫,反爬,大众点评</a>
+    
+    
+</span>
+                <span id="busuanzi_container_page_pv">&nbsp&nbsp&nbsp&nbsp阅读次数：
+                    <span id="busuanzi_value_page_pv"></span>次
+                </span>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<h4 id="一、学习目标"><a href="#一、学习目标" class="headerlink" title="一、学习目标"></a>一、学习目标</h4><pre><code>1.了解大众点评的CSS反爬策略
+2.破解其反爬策略
+3.使用httpClient正确获取详情页评论相关信息
+</code></pre><h4 id="二、目标现状"><a href="#二、目标现状" class="headerlink" title="二、目标现状"></a>二、目标现状</h4><h5 id="大众点评作为一款国民最受欢迎的APP之一，不仅为用户提供商户信息、消费点评及消费优惠等信息服务，同时亦提供团购、餐厅预订、外卖及电子会员卡等O2O（Online-To-Offline）交易服务，所以也深受一些爬虫爱好者的喜爱。每次女朋友下达命令，周末吃什么，去哪里好玩了，自己马上去点评上巴拉一顿（爬取商户信息，美食排名，价格、评论分析统计…）马上就知道哪家店最近热门，有优惠了。哈哈，突然发现找一个程序员男朋友是一件多么有先见之明的事儿…"><a href="#大众点评作为一款国民最受欢迎的APP之一，不仅为用户提供商户信息、消费点评及消费优惠等信息服务，同时亦提供团购、餐厅预订、外卖及电子会员卡等O2O（Online-To-Offline）交易服务，所以也深受一些爬虫爱好者的喜爱。每次女朋友下达命令，周末吃什么，去哪里好玩了，自己马上去点评上巴拉一顿（爬取商户信息，美食排名，价格、评论分析统计…）马上就知道哪家店最近热门，有优惠了。哈哈，突然发现找一个程序员男朋友是一件多么有先见之明的事儿…" class="headerlink" title="大众点评作为一款国民最受欢迎的APP之一，不仅为用户提供商户信息、消费点评及消费优惠等信息服务，同时亦提供团购、餐厅预订、外卖及电子会员卡等O2O（Online To Offline）交易服务，所以也深受一些爬虫爱好者的喜爱。每次女朋友下达命令，周末吃什么，去哪里好玩了，自己马上去点评上巴拉一顿（爬取商户信息，美食排名，价格、评论分析统计…）马上就知道哪家店最近热门，有优惠了。哈哈，突然发现找一个程序员男朋友是一件多么有先见之明的事儿…"></a>大众点评作为一款国民最受欢迎的APP之一，不仅为用户提供商户信息、消费点评及消费优惠等信息服务，同时亦提供团购、餐厅预订、外卖及电子会员卡等O2O（Online To Offline）交易服务，所以也深受一些爬虫爱好者的喜爱。每次女朋友下达命令，周末吃什么，去哪里好玩了，自己马上去点评上巴拉一顿（爬取商户信息，美食排名，价格、评论分析统计…）马上就知道哪家店最近热门，有优惠了。哈哈，突然发现找一个程序员男朋友是一件多么有先见之明的事儿…</h5><h5 id="但是，越来越多的不正常人（恶意的爬虫）的光顾，也让大众点评的反爬越来越严格，有时候甚至会摆出宁可错杀一万，也不放过一个的态度，正常浏览都会跳出各种验证。最近，他们刚更新了反爬机制，即通过CSS样式-SVG矢量图偏移来替换文字的策略，我们今天就来一起研究一下"><a href="#但是，越来越多的不正常人（恶意的爬虫）的光顾，也让大众点评的反爬越来越严格，有时候甚至会摆出宁可错杀一万，也不放过一个的态度，正常浏览都会跳出各种验证。最近，他们刚更新了反爬机制，即通过CSS样式-SVG矢量图偏移来替换文字的策略，我们今天就来一起研究一下" class="headerlink" title="但是，越来越多的不正常人（恶意的爬虫）的光顾，也让大众点评的反爬越来越严格，有时候甚至会摆出宁可错杀一万，也不放过一个的态度，正常浏览都会跳出各种验证。最近，他们刚更新了反爬机制，即通过CSS样式+SVG矢量图偏移来替换文字的策略，我们今天就来一起研究一下"></a>但是，越来越多的不正常人（恶意的爬虫）的光顾，也让大众点评的反爬越来越严格，有时候甚至会摆出宁可错杀一万，也不放过一个的态度，正常浏览都会跳出各种验证。最近，他们刚更新了反爬机制，即通过CSS样式+SVG矢量图偏移来替换文字的策略，我们今天就来一起研究一下</h5><h4 id="三、分析目标"><a href="#三、分析目标" class="headerlink" title="三、分析目标"></a>三、分析目标</h4><h5 id="我们随便打开一个景点，就以故宫为例吧"><a href="#我们随便打开一个景点，就以故宫为例吧" class="headerlink" title="我们随便打开一个景点，就以故宫为例吧"></a>我们随便打开一个景点，就以故宫为例吧</h5><ul>
+<li><p>正常情况（经过浏览器渲染），我们在网页上打开看到是这样的评论：</p>
+<p>  <img src="https://langjianwei.github.io/images/dianping01.png" alt="“图01”"></p>
+</li>
+<li><p>但是我们查看网页的源码你就会发现是这样的：</p>
+<p>  <img src="https://langjianwei.github.io/images/dianping02.png" alt="“图02”"></p>
+</li>
+</ul>
+<p><code>关于作者</code></p>
+<p>在兴趣的驱动下,写一个<code>免费</code>的东西，有欣喜，也还有汗水，希望您能喜欢我的作品，尊重原创，共同进步</p>
+<p>水平有限，<code>如有错误，请不吝赐教</code>，虚心改正</p>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="clearfix">
+            <nav class="pagination" role="pagination">
+    
+    
+    <a class="pull-right" href="/2019/05/19/java多线程环境下竞态条件的问题/">
+        java多线程环境下竞态条件的问题 →
+    </a>
+    
+</nav>
+
+        </nav>
+        <div class="duoshuo" style="padding-top:30px">
+            <div id="cyReward" role="cylabs" data-use="reward" style="text-align:center"></div>
+            <!-- 畅言评论框 start -->
+<div id="SOHUCS" sid="undefined" style="padding: 0px 30px 0px 46px;"></div>
+<!-- 畅言评论框 end -->
+<script type="text/javascript"> 
+(function(){ 
+var appid = 'cyt8ELT4g'; 
+var conf = 'prod_7d9bc5076718eb3f413bf4277ad59436'; 
+var width = window.innerWidth || document.documentElement.clientWidth; 
+if (width < 960) { 
+window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
         </div>
     </div>
+        <script type="text/javascript" charset="utf-8" src="https://changyan.itc.cn/js/lib/jquery.js"></script>
+        <script type="text/javascript" charset="utf-8" src="https://changyan.sohu.com/js/changyan.labs.https.js?appid=cytaHjVBa"></script>
 </section>
+
+
       
 <!-- ============================ Footer =========================== -->
 
